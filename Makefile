@@ -10,4 +10,4 @@ clean:
 	rm -rf _site/*
 
 publish:
-	ssh sayon@rubber-duck-typing.com 'cd www; git pull; make '
+	ssh sayon@rubber-duck-typing.com 'cd www; git pull && make '
