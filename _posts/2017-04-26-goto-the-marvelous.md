@@ -77,15 +77,15 @@ Nevertheless they are not only potent, but very convenient for some tasks such
 as template matching in strings, implementing network protocols and robot controlling tasks.
 
 Here is a toy example, taken from 
-[my book](http://www.apress.com/us/book/9781484224021). It checks whether the 
-input string containing only characters 0 and 1 contains an even number of 
-ones. It is common to draw nice diagrams for FSM, such as this one, showing 
-states as circles and transitions as arrows between them.
-
+[my book](http://www.apress.com/us/book/9781484224021). This FSM checks whether
+the input string containing only characters 0 and 1 contains an even number of
+ones. It is common to draw cool looking diagrams for FSM, showing states as
+circles and transitions as arrows between them.
 
 ![fsm_example](/images/posts/2017-04-26-goto-the-marvelous/fsm_parity_example.png) 
 
-Here is the implementation in C. I have omitted error checks for brevity.
+Let us take a look at its implementation in C. I have omitted error checks for
+brevity.
 
 {% highlight c %}
 #include <stddef.h>
