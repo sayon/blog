@@ -197,8 +197,8 @@ other branch preceded by an additional `deinit`:
 
 {% highlight c %}
 //
-                                   return 0;
-                  sa_deinit( &a ); return 0;
+                                  return 0;
+                 sa_deinit( &a ); return 0;
 sb_deinit( &b ); sa_deinit( &a ); return 0;
 {% endhighlight %}
 
