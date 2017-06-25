@@ -45,7 +45,7 @@ process of changing our perception and/or understanding of concepts. This
 changing is the transformation of an image of a bottle into an image of a
 carrot. 
 
-![imp-of-the-perverse](images/posts/2017-06-25-what-a-computer-scientist-can-learn-from-rene-magritte/the-explanation-1952.jpg) 
+![imp-of-the-perverse](/images/posts/2017-06-25-what-a-computer-scientist-can-learn-from-rene-magritte/the-explanation-1952.jpg) 
 
 
 * The name can be just something vaguely connected to what's on the painting.
@@ -53,7 +53,7 @@ For example, take the "Imp of the Perverse". The name should make you think
 that something wrong is going on, make you uncomfortable, which should 
 strengthen the feeling of wrongness coming from the piece of art itself.
 
-![imp-of-the-perverse](images/posts/2017-06-25-what-a-computer-scientist-can-learn-from-rene-magritte/imp-of-the-perverse-1927.jpg) 
+![imp-of-the-perverse](/images/posts/2017-06-25-what-a-computer-scientist-can-learn-from-rene-magritte/imp-of-the-perverse-1927.jpg) 
 
 
 In a sense, Magritte wants you to think critically, not make you trying to
@@ -66,7 +66,7 @@ L'Herbier, which tells a story of a lone sailor. More importantly, it resembles
 the final scene of "Juve against Fantômas" where this villain in black prevails
 by setting off an explosion with a pull of a lever.
 
-![the-man-from-the-sea]( images/posts/2017-06-25-what-a-computer-scientist-can-learn-from-rene-magritte/the-man-of-the-sea-1927.jpg)
+![the-man-from-the-sea](/images/posts/2017-06-25-what-a-computer-scientist-can-learn-from-rene-magritte/the-man-of-the-sea-1927.jpg)
 
 
 # Objects, their images and words 
@@ -77,7 +77,19 @@ the journal _La révolution surréaliste_ as a result to his extensive
 experimentation in the late 1920's.  It studies how words (e.g. poetry) and
 paintings as the means of expressing ideas. Here is the text in French:
 
-![the-man-from-the-sea]( images/posts/2017-06-25-what-a-computer-scientist-can-learn-from-rene-magritte/the-man-of-the-sea-1927.jpg)
+![the-man-from-the-sea](/images/posts/2017-06-25-what-a-computer-scientist-can-learn-from-rene-magritte/words-and-images-1929.gif)
 
 
+
+
+* _An object and its name are not inseparable. We can find a better name._ 
+* _Some objects have no name_. Words are parts of languages, and there is no
+a language which includes all notions from any other one. Take Dostoevsky's
+"nadryv" or dozens of words for different states of snow in the local langauges
+of northen tribes. 
+* _A word can be used to refer you to itself._ This thought is illustrated by 
+ a word "sky" inside a closed curve, depicting the said sky. As the label
+ "sky" is placed directly on the image of sky, it refers to this exact instance 
+ of "sky", which makes for a funny wordplay.
+ 
 
