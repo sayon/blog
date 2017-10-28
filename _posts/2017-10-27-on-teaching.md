@@ -1,6 +1,6 @@
 ---
 layout: post
-title: "On teaching"
+title: "On teaching programmers and mathematicians"
 category: articles
 tags: [teaching]
 comments: true
