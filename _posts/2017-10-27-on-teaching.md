@@ -25,7 +25,8 @@ generally true:
 See [Forgetting curve (Wikipedia)](https://en.wikipedia.org/wiki/Forgetting_curve).
 
 
-4. Different people base on different types of perception: sound, visual, touch
+4. Different people base on different types of perception: sound, visual, touch. That's what they remember most easily; it does not mean that even if information is not representable in audible format, it should be presented like this to those who tend towards sound perception.
+
 5.  Some people like the top-down approach (deductive thinking), while others prefer generalize examples (inductive thinking).
 
 
