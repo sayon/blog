@@ -2,7 +2,7 @@ all:
 	bundle exec jekyll build --trace
 
 serve:
-	bundle exec jekyll serve
+	bundle exec jekyll serve --drafts
 
 auto:
 	bundle exec jekyll build --watch
