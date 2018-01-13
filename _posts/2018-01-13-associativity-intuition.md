@@ -6,8 +6,6 @@ tags: [associativity, mathematics, intuition]
 comments: true
 ---
 
-# The   idea of associativity
-
 I found a beautiful explanation about what property does the associativity capture.
 
 > You can think of each element of a monoid as having two sides. The
