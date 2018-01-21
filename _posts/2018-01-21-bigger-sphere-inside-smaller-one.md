@@ -19,7 +19,7 @@ What if we try to define a sphere of radius $$R > r$$ inside the space we are wo
 
 ![](/images/posts/2018-01-21-bigger-sphere-inside-smaller-one/spheres.png)
 
-The actual sphere will **not** look like the one you are seeing, but as an intersection of two. The reason is: we are effectively selecting a **subset** of points of space $$D_r(0)$$ whose distance to $$B$$ is less or equal to $$r$$. 
+Why does this sphere look as an intersection of two? We are, by definition, effectively selecting a **subset** of points of space $$D_r(0)$$ whose distance to $$B$$ is less or equal to $$r$$. Any point of $$R^n$$ lying outside of $$D_r(0)$$ is out of reach.
 
 As long as $$R < 2r$$, we can fit a bigger sphere inside of a smaller one. Once we cross the $$2r$$ border, even if we pick a center $$B$$ on the border of the $$D_r(0)$$, the longest distance between two points inside of $$D_r(0)$$ can not surpass $$2r$$. Thus, all points will be contained inside of $$D_R(B)$$.
 
