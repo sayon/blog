@@ -43,3 +43,11 @@ Based on them, I think that the best way to teach maths should incorporate the f
 * Very few people can memorize a lot of abstract stuff and then deduce everything from it when asked to apply it in practice. Hence we need to provide examples. In my opinion, some nice explanation patterns are:
     * Deductive and inductive: start with definitions, show examples, explain how exactly each example follows from definition
     * Inductive and deductive: Start informal, give intuition, provide examples, then give precise formal definition, show how exactly the given examples are generalized to these definitions. Then give more examples, but derive them from formal definitions.
+
+
+
+* Your students should know, which topics will be covered during the next
+session. Ideally, they should start studying them on their own. Then when they
+come they will be more prepared to listen to you and their minds will produce
+more useful questions.
+you more prepared.
