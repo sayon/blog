@@ -1,0 +1,20 @@
+#!/bin/bash
+DATE=`date +%Y-%m-%d`
+NAME="$1"
+SANITIZED_NAME=`echo "$NAME" | tr -d ',:-^&*()!@#' | tr ' ' '-' `
+FULLNAME="$DATE-$SANITIZED_NAME"
+mkdir -p "assets/posts/$SANITIZED_NAME"
+FILE="_posts/$FULLNAME.md"
+
+echo -e "---
+layout: post
+title: \"$NAME\"
+category: articles
+tags: 
+comments: true
+---
+" > $FILE
+
+git add "$FILE"
+
+

@@ -116,7 +116,7 @@ kramdown:
     hard_wrap: false
     syntax-highlighter: rouge
 
-gems:
+plugins:
   - jekyll-paginate
   - jekyll-sitemap
   - jekyll-feed
