@@ -83,7 +83,7 @@ $$4 \mapsto \text{"four"}$$
 
 As a tree, it will look like this:
 
-![A simple mapping](/images/posts/2018-01-17-memory-in-compcert/ptree.png)
+![A simple mapping]({% asset_path ptree.png %})
 
 
 As we see, the elements are enumerated according to the breadth-first search order. 

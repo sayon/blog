@@ -45,7 +45,10 @@ process of changing our perception and/or understanding of concepts. This
 changing is the transformation of an image of a bottle into an image of a
 carrot. 
 
-![imp-of-the-perverse](/images/posts/2017-07-18-a-word-about-rene-magritte/the-explanation-1952.jpg) 
+![the-explanation]({% asset_path the-explanation-1952.jpg %})
+
+
+
 
 
 * The name can be just something vaguely connected to what's on the painting.
@@ -57,7 +60,7 @@ In a sense, Magritte wants you to think critically, not make you trying to
    connect distantly related terms. We can find a context to associate any pair
    of words if we want to, though not all contexts are of importance to us.
 
-![imp-of-the-perverse](/images/posts/2017-07-18-a-word-about-rene-magritte/imp-of-the-perverse-1927.jpg) 
+![imp-of-the-perverse]({% asset_path imp-of-the-perverse-1927.jpg %}) 
 
 * The name might hold an allusion to other works of art Magritte associated his 
 painting with. For example, "The Man from the Sea" refers to the film of Marcel
@@ -65,7 +68,7 @@ L'Herbier, which tells a story of a lone sailor. More importantly, it resembles
 the final scene of "Juve against Fantômas" where this villain in black prevails
 by setting off an explosion with a pull of a lever.
 
-![the-man-from-the-sea](/images/posts/2017-07-18-a-word-about-rene-magritte/the-man-of-the-sea-1927.jpg)
+![the-man-from-the-sea]({% asset_path the-man-of-the-sea-1927.jpg %})
 
 
 # Objects, their images and words 
@@ -75,7 +78,7 @@ worlds. He published his famous text "Words and images" in 1929 in
 the journal _La révolution surréaliste_ as a result to his extensive
 experimentation in the late 1920's.  
 
-![the-man-from-the-sea](/images/posts/2017-07-18-a-word-about-rene-magritte/words-and-images-1929.gif)
+![the-man-from-the-sea]({% asset_path words-and-images-1929.gif %})
 
 This text studies how words (e.g. poetry) and
 paintings as the means of expressing ideas. Here is the text in English with

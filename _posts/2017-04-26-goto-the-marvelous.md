@@ -82,12 +82,12 @@ the input string containing only characters 0 and 1 contains an even number of
 ones. It is common to draw cool looking diagrams for FSM, showing states as
 circles and transitions as arrows between them.
 
-![fsm_example](/images/posts/2017-04-26-goto-the-marvelous/fsm_parity_example.png) 
+![fsm_example]({% asset_path fsm_parity_example.png %}) 
 
 Let us take a look at its implementation in C. I have omitted error checks for
 brevity.
 
-{% highlight c %}
+```c
 #include <stddef.h>
 #include <stdio.h>
  
@@ -121,7 +121,7 @@ int main(void) {
  
     return 0;
 }
-{% endhighlight %}
+```
 
 ### Model checking
 An additional benefit is that there exist a quite powerful verification
@@ -149,7 +149,7 @@ Consider this function, which returns the error code and uses three objects:
 which free all associated resources.
 
 
-{% highlight c %}
+```c
 #include <iostream>
 
 int f() {
@@ -166,7 +166,7 @@ int f() {
     // Destructors for myA, myB, myC will be called here anyway
     return 1;
 }
-{% endhighlight %}
+```
 
 In C we often want to do the same thing, but we do not have that luxury of
 automatically calling anything. It is, however, very important do to because
@@ -174,7 +174,7 @@ some structures have dynamically allocated fields or are associated with other
 resources such as file descriptors. It can easily leak resources. So, to 
 do things right, we have to produce quite a mess:
 
-{% highlight c %}
+```c
 int f() {
     struct sa a;
     struct sb b;
@@ -187,7 +187,7 @@ int f() {
     
     return 1;
 }
-{% endhighlight %}
+```
 
 Imagine you had 5 structures to work with, this straightforward approach is
 going to turn your code into nightmare! However, with the help of `goto`s we
@@ -195,18 +195,18 @@ are going to exploit a nice little trick. It bases on the fact that all such
 branches can be ordered by inclusion: each branch looks exactly  like some
 other branch preceded by an additional `deinit`:
 
-{% highlight c %}
+```c
 //
                                   return 0;
                  sa_deinit( &a ); return 0;
 sb_deinit( &b ); sa_deinit( &a ); return 0;
-{% endhighlight %}
+```
 
 If we throw labels in between we could jump to any statement in this sequence.
 Then all following statements will be executed as well.  This way we are going
 to refactor the example above to look like this:
 
-{% highlight c %}
+```c
 int f() {
     struct sa a;
     struct sb b;
@@ -225,7 +225,7 @@ fail_b:
 fail:
     return 0;
 }
-{% endhighlight %}
+```
 
 Isn't it way nicer that what we have seen before? Additionally, no assignments
 are performed hence no fuss about `goto` evilness at all. 
@@ -238,7 +238,7 @@ compilers. Basically, it allows to store a label into a variable and perform
 jumps to it. It differs from calling function by pointer because no return is
 ever performed. The simplest case is shown below:
 
-{% highlight c %}
+```c
 #include <stdio.h>
 
 int main() {
@@ -252,7 +252,7 @@ label:
     puts("Did jump");
     return 1;
 }
-{% endhighlight %}
+```
 
 We are taking raw label address using an unusual double ampersand syntax and
 then perform a `goto`. Notice the additional asterisk before `goto`
@@ -268,7 +268,7 @@ exactly this part of program execution.
 Without computed `goto`s:
 
 
-{% highlight c %}
+```c
 #include <stdio.h>
 #include <inttypes.h>
 
@@ -309,12 +309,12 @@ int main() {
     interpreter( program );
     return 0;
 }
-{% endhighlight %}
+```
 
 
 With computed gotos:
 
-{% highlight c %}
+```c
 #include <stdio.h>
 #include <inttypes.h>
 
@@ -356,7 +356,7 @@ int main() {
     interpreter( program );
     return 0;
 }
-{% endhighlight %}
+```
 
 We replaced `switch` with an array storing the address of an instruction
 handler. Each time we fetch an instruction, we are using its bytecode as an
