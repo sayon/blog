@@ -1,6 +1,6 @@
 ---
 layout: post
-title: "Why every serious programmer should learn Coq"
+title: "Why every programming student should learn Coq"
 category: articles
 tags: [coq, teaching]
 comments: true
