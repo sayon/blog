@@ -1,0 +1,83 @@
+---
+layout: post
+title: "Why every serious programmer should learn Coq"
+category: articles
+tags: [coq, teaching]
+comments: true
+---
+
+My personal experience with Coq proof assistant over the last years made me
+think, that such tool, as exotic and niché as it might seem, is invaluable in a
+programmer's education. Maybe we should include it in common Software
+Engineering and Computer Science master programs, so that students prove
+theorems using it.
+
+When we are learning to program, we are trying to make a piece of code "just
+work". It means, that in a certain context it should demonstrate an expected
+behavior. Kind of like:
+
+* We are currently in a context $$A$$
+* We want to get to another context $$B$$
+* How do we get from $$A$$ to $$B$$? 
+
+Then we are building a system of language constructions in order to be able to
+finally combine them into a more or less straight road from $$A$$ to $$B$$.
+
+And here is the source of a vast majority of programming errors: the definition
+of a working program. A program "works" when it does not demonstrate an
+unexpected behavior in any possible context! So, our roads we have built should
+never allow us to get somewhere we do not want to go. Most programmers are
+usually OK with a fairly superficial analysis of possible values and program
+behaviors. Behaviors in plural is not a mistake here, because many languages are
+allowing for non-deterministic computational model. It means, for example, that
+in C we do not know whether `f` or `g` will be called first in this piece of code:
+
+```c
+int x = f(4) + g(2);
+```
+
+Now add for a total of 10 functions and make sure all of them have side effects (like logging or networking) to make sure a compiler will chose one of $$10!$$ possible behaviors:
+
+
+```c
+int x = 
+  f1(42) +
+  f2(42) +
+  f3(42) +
+  f4(42) +
+  f5(42) +
+  f6(42) +
+  f7(42) +
+  f8(42) +
+  f9(42) +
+  f0(42);
+```
+
+
+Most languages used in either industry or for education are giving too much
+liberty to a coder, the right to which is usually exercised in the least
+convenient places. For example, the `switch` construction which does zero
+reasoning about whether the cases are exhaustive or not.
+
+
+The first step towards more correct programs is learning functional languages
+with well thought out type systems, like Ocaml and Haskell. Their syntax and
+semantics are implemented in a way that makes you think about all possible
+branches of execution in a more concise way. I mean such features as pattern
+matching, expressions and statements not being separated into two different
+syntactic categories, `else` branch being mandatory. This make you adapt a
+better reflex of thinking about all possible behaviors in a given context and 
+cutting unwanted roads right away. This reflex stays with you no matter what
+language you are programming in, and will make you a better Java or C programmer.
+
+Now, Coq is doing that at an extreme. You have to write proofs. Writing a
+non-trivial Coq program and proving it correct is hard and verbose; this is an
+excellent exercise of thought discipline. Every inference should be explicitly
+stated. 
+
+Surely, you might ask, why can't I just do more mathematics? It is indeed right,
+that building mathematical proofs as we are doing in e.g. calculus is aimed at
+the same competences. However, using automated proof assistant makes the
+exercise much more effective by constantly checking your proof and punishing you
+if you forget a corner case here and there. Such proofs are also much more
+verbose, because of being highly formal.
