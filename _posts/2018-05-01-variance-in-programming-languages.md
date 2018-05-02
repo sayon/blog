@@ -36,10 +36,11 @@ You already see the arrows like `A<x>` $$\rightarrow$$ `B<x>`; these are not
 going anywhere, they are valid for any value of type argument.
 
 
-What is of interest to us is: for a parameterized type such as `A`, how will `A<x>` and `A<y>` be related? 
+What is of interest to us is: for a parameterized type such as `A`, how will
+`A<x>` and `A<y>` be related? 
 
-There can be three cases: 
-,  and **contravariance**.
+There can be three cases: **invariance**, **covariance**, and
+**contravariance**.
 
 
 * **Invariance**: whatever relation exists between `x` and `y`, `A<x>` and `A<y>` have no relation whatsoever. 
@@ -84,10 +85,12 @@ If `x` $$\leftarrow$$ `y`, then `A<x>` $$\rightarrow$$ `A<y>`.
 
 # Language prerequisites
 
-In order for variance to even exist we need the language to have the following features:
+In order for variance to even exist we need the language to have the following
+features:
 
 * It has to be typed
-* It should sometimes allow an entity of type $A$ to be implicitly interpreted as an entity of type $B$.
+* It should sometimes allow an entity of type $A$ to be implicitly interpreted
+  as an entity of type $B$.
 
   The most common cases are:
     * *Subtyping* in class hierarchies. 
@@ -109,7 +112,7 @@ In other words, we need to be able to represent types as an oriented graph.
 
 # Common facts
 
-A couple of facts 
+Here I want to mention a couple of facts it is useful to be aware of.
 
 ## Function variance
 
@@ -128,10 +131,17 @@ Functions are contravariant on arguments and covariant on return type. Why so?
 As a rule of thumb, **immutable collections can be covariant, mutable collections should be invariant**.
 
 Imagine, that a mutable `List` is covariant. Then take a `List<String>`. You can
-reinterpret it as a `List<Object>`. That list can store anything, so it is a
-valid operation to add an integer to it. If we do it, we are screwed because we
-just have added an integer to a list that assumes it is holding strings,
+reinterpret it as a `List<Object>`, because `Object` $$\rightarrow$$ `String`.
+That list can store anything, so it is a valid operation to add an integer to
+it. From the type perspective, its method `set (int idx, T value)` will become 
+`set(int idx, Object value)`, so it it valid to give it an integer as a value.
+If we do it, we are screwed because we just have added an integer to a list
+that assumes it is holding strings, the objects of an incompatible type,
 effectively hacking the type system.
+
+The next time when we try to use some function like `printString` on all
+elements of the said list, we are up for some surprises, ranging (depending on
+the language semantics) from runtime errors, to undefined behavior.
 
 In Scala, if you try to define a covariant List, you will get warned on the
 definition of its `set` method, that accepts an argument of type `T`
@@ -143,7 +153,5 @@ warning: "Covariant argument in contravariant position".
 Immutable collections do not have such problem. If we try to replicate that
 example, we will just get a new `List` of objects, for which it is perfectly
 fine to store everything you might want it to.
-
-
 
 
