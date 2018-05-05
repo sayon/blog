@@ -89,8 +89,8 @@ In order for variance to even exist we need the language to have the following
 features:
 
 * It has to be typed
-* It should sometimes allow an entity of type $A$ to be implicitly interpreted
-  as an entity of type $B$.
+* It should sometimes allow an entity of type _A_ to be implicitly interpreted
+  as an entity of type _B_.
 
   The most common cases are:
     * *Subtyping* in class hierarchies. 
