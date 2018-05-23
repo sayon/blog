@@ -134,7 +134,7 @@ Imagine, that a mutable `List` is covariant. Then take a `List<String>`. You can
 reinterpret it as a `List<Object>`, because `Object` $$\rightarrow$$ `String`.
 That list can store anything, so it is a valid operation to add an integer to
 it. From the type perspective, its method `set (int idx, T value)` will become 
-`set(int idx, Object value)`, so it it valid to give it an integer as a value.
+`set(int idx, Object value)`, so it is valid to give it an integer as a value.
 If we do it, we are screwed because we just have added an integer to a list
 that assumes it is holding strings, the objects of an incompatible type,
 effectively hacking the type system.
