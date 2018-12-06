@@ -27,6 +27,8 @@ very fond of various types of electronic music.
 Feel free to drop me a line by mail or [telegram @ igorjirkov](http://t.me/igorjirkov). English, french, german and russian are
 accepted.
 
+[paypal me](http://paypal.me/izhirkov)
+
 This blog is named after my friend Mr. Duck. He is a snobbish, intellectual,
 and misanthropic gentleman.
 
