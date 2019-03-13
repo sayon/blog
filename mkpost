@@ -1,4 +1,5 @@
 #!/bin/bash
+# Usage: mkpost "post name"
 DATE=`date +%Y-%m-%d`
 NAME="$1"
 SANITIZED_NAME=`echo "$NAME" | tr '[:upper:]' '[:lower:]' | tr -d ',:-^&*()!@#' | tr ' ' '-' `
