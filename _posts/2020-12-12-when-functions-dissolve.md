@@ -31,8 +31,8 @@ Then we assemble the bigger system from these blocks.
 
 Modularity can be more or less pronounced:
 
-- *soft modularity* means that errors that appear in one module can propagate to other parts of the system. This propagation is out of control and lead to unpredictable consequences.
-- *strong modularity* means that modules are more isolated and the error propagation is limited.
+- *soft modularity* = errors inside one module can propagate to other modules. This propagation is out of control and leads to unpredictable consequences.
+- *strong modularity* = modules are more isolated and the error propagation is limited.
 
 These two notions are pure and extreme, real systems often fall somewhere in
 between.
@@ -40,14 +40,14 @@ between.
 An example of soft and strong modularity is seen in a computer which executes
 several programs in parallel.
 Each process is a component of a running system. 
-If the processes share the same address space then the modularity is soft,
-because an error in one process can lead to a data corruption of another.
-If the processes have isolated virtual address spaces then the modularity is
-hard, because an error in one process can not influence the memory in another
-one. 
-There are of course details to that, like when a process crashes while another
-one is waiting for its response, but such situations can be dealt with in a
-reasonable way e.g. through timeouts.
+If the processes share the same address space then an error in one process can lead to a data corruption of another.
+The modularity is then soft.
+If the processes have isolated virtual address spaces then an error in one
+process can not influence the memory of another.
+Then the modularity is stronger.
+There are of course details to that, like what happens when a process crashes
+while another one is waiting for its response, but such situations can be dealt
+with in a reasonable way e.g. through timeouts.
 
 ## Functions as modules
 
@@ -56,17 +56,17 @@ Functions abstract away the complexity: a caller provides them with arguments,
 and the function yields the computation result plus side-effects, like file
 output.
 
-In a high level language if we do not use global variables or resources
-functions give us some reasonable modularity.
+In a high level language functions give us some reasonable modularity (if we do
+not use global variables or resources).
 Any function can communicate failure to its caller through returning errors:
-`NULL`, instances of optional types etc. (or exceptions).
+`NULL`, instances of optional types etc. (or through exceptions).
 
 ## Higher level functions and lower level subroutines
 
 The source code is eventually transformed into machine code. Without too much
-oversimplification functions in higher level languages are translated into
-functions in machine instructions. To make a distinction between them we will
-call the lower level functions *subroutines*.
+oversimplification, functions in higher level languages are translated into
+functions in machine code. To make a distinction between them we will
+call these lower level assembly functions *subroutines*.
 
 Subroutines should support two kinds of operations:
 
@@ -77,10 +77,10 @@ On common architectures there are instructions or instruction patterns that are
 used to call subroutines and return from them, like `call`/`ret` on Intel 64, or
 `bl`/`pop pc` on ARM. 
 
-The subroutines are different from functions in one important way:
-subroutines operate in a common memory space with each other. 
-Functions have local variables and arguments, but subroutines use CPU registers,
-which are global and shared among them.
+The subroutines are different from functions as we perceive them in one important way:
+subroutines operate in a common memory space with each other.
+Functions have local variables and arguments, but subroutines are forced to use
+CPU registers, which are global and shared among them.
 
 To make an analogy with higher-level language, imagine that:
 
@@ -101,7 +101,8 @@ how they function and what possibilities it offers to us.
 The rest of this post uses the assembly code as a device to tell about two
 interesting concepts: tail-call elimination and coroutines. 
 We are going to optimize the subroutine `print_newline` in several stages up to
-the point that it is going to lose its shape as an isolated subroutine.
+the point that it is going to lose its shape as an isolated subroutine and get
+reduced to one instruction.
 
 
 ```nasm
