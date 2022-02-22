@@ -1,0 +1,5 @@
+#+title: rubber duck typing
+#+author: Igor Zhirkov
+
+
+#+include: "posts/sitemap.org" :lines "3-"

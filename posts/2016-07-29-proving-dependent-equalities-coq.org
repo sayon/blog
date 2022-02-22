@@ -1,0 +1,35 @@
+#+setupfile: ../setup/setup.org
+#+title: Proving dependent equalities in Coq with SSReflect
+#+date: <2016-07-29>
+#+excerpt: A little trick.
+#+filetags: :coq:
+
+
+Proving dependent equalities in Coq  is boring, but quite frequently done.
+I got so annoyed with it that I wrote a little tactic to automatize it a bit.
+
+It does use ssreflect routines but it should not be hard to adapt it to vanilla Coq.
+
+#+begin_src coq
+Ltac depcomp H := apply EqdepFacts.eq_sigT_eq_dep in H; 
+apply Coq.Logic.Eqdep.EqdepTheory.eq_dep_eq in H.
+Ltac eq_comp c x y := 
+  move: (c x y); 
+  case; 
+  last try do [by [right; case]| 
+  right; case; let H' := fresh "H" in move=>H'; by depcomp H'];
+  first try let H' := fresh "H" in move=> H'; subst.
+
+
+Definition eq_dec T := forall x y: T, {x = y} + {~ x = y}.
+
+(* Example *)
+Theorem pair_eq_dec T U: eq_dec T -> eq_dec U -> eq_dec (prod T U).
+move=> HT HU [x y] [a b].
+eq_comp HT x a.
+eq_comp HU y b.
+by left.
+Qed.
+#+end_src
+
+

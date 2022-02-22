@@ -1,0 +1,28 @@
+#+setupfile: setup/setup.org
+
+* Hello
+My name is Igor Zhirkov, you may encounter me in Nantes, Warsaw, or St.Petersburg.
+
+Keywords: PhD student, Computer Science, programmer, musician, writer.
+
+I am interested in maths, programming, programming languages, automated theorem proving, and system design.
+I have written a [[http://amazon.com/Low-Level-Programming-Assembly-Execution-Architecture/dp/1484224027][book]] about low-level programming for my students; this is a slightly outdated version of the class I was teaching in  
+ITMO university in St. Petersburg, Russia.
+
+Currently I am pursuing my PhD on verified C refactorings.
+
+As for music, I am an amateur pianist.
+My preferences are baroque and late-romantic music, progressive rock, jazz fusion, and various types of electronic music. 
+
+Feel free to drop me a line by [[mailto:igorjirkov@gmail.com][mail]] or in [[https://t.me/igorjirkov][telegram]].
+English, french, german and russian are accepted.
+
+[[http://paypal.me/izhirkov][paypal me]]
+
+This blog is named after my friend Mr. Duck. He is a snobbish, intellectual, and slightly misanthropic.
+
+#+export_html: <center>
+[[./img/bigduck.png]]
+#+export_html: </center>
+
+I am migrating this site from jekyll to org-mode because of stability reasons. Not all posts are yet moved.

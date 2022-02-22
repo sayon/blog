@@ -1,0 +1,59 @@
+#+setupfile: ../setup/setup.org
+#+title: Writing essays
+#+date: <2018-09-16>
+#+excerpt: Writing texts was an acquired taste for me. Here I am advicing my former self on how to become a better writer.
+#+filetags: :education:writing:
+
+
+I am not a naturally good writer. It took me writing a 450 pages book and
+countless pages of notes, reports, essays and posts to only start building a
+sane mechanism to identify the exact flaws in my writing (and in the text
+creation process itself). I found an introductory document on writing essays by
+J.B.Peterson to be of a great use for me. I think it is valuable for someone
+like me who has to write a lot of text for his PhD, albeit my domain is
+computer science. These are my notes for it.
+
+* General concerns
+
+- Eating well is important. Proteins and fats are good for breakfast.
+- You have a daily limit of several hours of productive work. This is why working every day is so important.
+- Try to concentrate for 15 minutes straight, if you succeed the concentration will persist.
+- If you have writer's block, read. It gives food for thought.
+- Separate writing (create) from editing (reduce, arrange).
+- There are rules for writing, which work most of the time. They are dictated by empirical evidence on providing the best reading experience and by the experience of other writers.
+- First draft should be longer than the final version (probably 25%).
+- Better grab the reader's attention immediately, so do not forward reference in the beginning.
+- Write often to structure your thoughts.
+
+* Levels of perceptions
+
+There are many choices we make when we write. These choices affect the text
+semantics. We can categorize them based on the "level of resolution":
+
+- Selection of words.
+- Sentence structure.
+- Order of sentences in a paragraph.
+- Order of paragraphs in an essay.
+- The essay as a whole.
+- Essay as seen by a reader (prism of his mind and personal experience).
+- Essay in a context of culture the reader is in.
+
+
+* Method
+
+1. Choose a topic
+2. Make a reading list and read; take notes (probably 2-3 times the amount of
+   final text you need).
+3. Write an outline (10-15 sentences). Stock introductions/conclusions are ok,
+   but should be thrown away after.
+4. Write a paragraph per outline heading (10-15 sentences). Do not edit too
+   much. A paragraph should present a single idea.
+5. For a single paragraph: place each sentence on its own line. Rewrite each
+   sentence to make it smoother and better. You can read it aloud and listen to
+   yourself. Try to cut length by 15-25%. Do for all paragraphs.
+6. Repeat by looking at each paragraph as a whole. Sentences that are no longer
+   necessary are to be eliminated here.
+7. Read your essay. Try to make an outline without looking at the text. It will
+   help throwing some sentences away, rearrange them etc.
+8. Wait a few days and re-read everything. When you are rewriting something but
+   you are not sure it becomes better anymore, it is time to stop.

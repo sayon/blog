@@ -1,0 +1,153 @@
+#+setupfile: ../setup/setup.org
+#+title: Advice for programming students
+#+date: <2018-03-17>
+#+excerpt: What I wish I have heard when I was 18.
+#+filetags: :programming:education:
+#+options: num: t
+
+There are many things I wish I knew when I started my journey as a programming
+student. Almost 10 years have passed since, and, sadly, I can not share my
+experience or insights with my past self, only with my younger colleagues. This
+post collects some of the most useful bits of advice I wish I heard when I was 18.
+
+
+* Decide who you are
+
+   You certainly do not need to be familiar with formal logic or categories if you
+   want to just know one practical thing (say, frontend) and only do it. There are
+   two main paths which differ by an effort, duration and outcome.
+   
+   - You can become proficient in one domain relatively fast — say one, two years.
+     You will not be useless, you will do things and make a living. There are enough
+     job opportunities (at least, for now) which do not demand much versatility.
+   
+   - You can become a well rounded specialist who invested a lot of time and effort in foundations. Then you will be able to adapt and switching career paths becomes relatively easy. You can do machine learning, then formal verification, than some low-level programming for trading or switch to game dev. That demands time and dedication — I’d estimate a minimum of 6–8 years.
+   
+   I strongly advocate the second path because it’s more versatile, interesting,
+   and brings more in the long run. IT is ever-changing so you want to pick up new
+   technologies fast. You also have more choice. Should you choose the hard way,
+   the rest of this post should be of a use for you.
+
+* Learn math because math is useful
+
+   I can not stress that enough. When you start,
+   you might think that you don’t need linear algebra, because you are unaware of
+   applications. However, for any non-trivial machine learning, you need it. You
+   need statistics and probability. You need logic, combinatorics, set theory, all
+   sorts of discrete mathematics, graph theory, computability, formal grammars,
+   lambda calculus, formal semantics, topology, type theories, a bit of number
+   theory, groups, rings, fields, categories.
+   
+   New technologies are constantly emerging. Many of them are based on the existing
+   mathematical models. If you know the underlying mathematics well, you get very
+   nice perks:
+   
+   - Picking new trendy things is orders of magnitude simpler.
+   - You understand where you can apply new methods and where you should not.
+   - You usually understand why the solutions are the way they are. Then you can tweak them to better suit the context.
+   
+   For example, I have had an impression, that few people understand, that you
+   should not always use least squares to evaluate how well your linear regression
+   fits the data. This is only adequate when the errors are distributed normally
+   with the appropriate mean value. If it is not the case, you will blindly apply
+   an inadequate solution without even thinking that a part of the model needs
+   tweaking.
+
+* Learn math to learn mathematical thinking
+   
+   Writing proofs makes you rigorous. You want to always think about all possible
+   paths of execution your program can take in order to not introduce bugs and
+   security issues. The clarity of thinking gained from constructing proofs is
+   precious. It also helps you in writing short, concise code.
+   
+* Pick your first language carefully
+
+  It should be well designed, which means:
+
+   - Consistency.
+   - Small core.
+   - No unnecessary complexity (it often comes from inconsistency: there are things you should just remember or constantly be aware of, that bring nothing useful to the table).
+   - Makes it harder to shoot yourself in the foot.
+   - This should also be a high level language, because **programming is problem solving**, not a mastery of a specific language. Knowing all little particularities of your favorite language is not a mastery of programming in itself.
+
+   I advise one of these languages:
+
+   - Scheme (there is a good classical introductory course “Structure and Interpretation of Computer Programs”)
+   - Smalltalk
+   - Eiffel
+   - ML
+
+   Don’t be fooled by their seeming unpopularity, in the programming world the popularity does not mean quality.
+   Do not start with Python, pretty please! It is badly designed, inconsistent, and does not teach you rigorous thinking. No need to get used to "well, it seems to usually work" mentality. Python has its uses, but not as a first language.
+
+* Expose yourself to greatness
+
+  If you get used to crap languages and crap tools, and crap software, and crap solutions, you will inevitably replicate them in your own work. Be critical, question everything, critic everything, search for inconsistencies and flaws.
+
+  For example, imagine you are learning a new language, Go. Google "Go language sucks" and read why people criticize it. Some of them will be pathetic, but some will actually have a point. It is likely, that you will obtain new knowledge from reading critical remarks and evaluating, whether they actually have a point, or are just there to whine.
+
+* Think on your own
+
+   I am teaching programming (C and assembly) since 2009 to the students in ITMO university in St.Petersburg, Russia. A lot of people have trouble programming and never actually succeed in learning it because of inability of creating code. When they get an assignment, they try to imitate an existing solution, maybe take some snippets from Stack Overflow, tune them to their liking. OK fine, you got your solution, what else do you want?
+
+  *You should learn to write code from scratch*. The types of skills needed for that are so different from meddling with existing code!
+
+   Programming is about making conscientious choices. You are in state A (you have access to a number of language features/libraries and you know how to combine them); you want to get to state B (the language constructions are combined in a way to express a solution). How do you build a route from A to B? Now, that is the real programming, the *problem solving*.
+   
+   When you start writing programs from scratch, it will be hard, but it is absolutely necessary to learn to build things from zero. To improve your problem solving skills it is crucial that you learn algorithms and data structures. Pick up a good book and solve contests online. I recommend “Algorithms” of Dasgupta for a start, then the classic work of Cormen. This will open a whole new world for you, I promise.
+   
+   The complimentary part of software creation process is designing the software architecture; it is impossible to learn to structure your programs well without building them from 0 to 100.
+
+* Broaden your horizons
+
+   *Program everyday, do side projects*. There is a very easy (and mostly accurate) way for me as a teacher to understand that my student will succeed as a programmer with a high probability. One question: What are you programming in your free time?
+
+   There is just not enough time for your teachers to tell you about everything. After all, after you are out of the university, you have to continue to learn on your own, until you retire. If you are passionate about what you are doing, you will explore different types of software just for fun, and that will give you much more experience and skills, than your less motivated peers will have.
+   
+   Ideally, you should touch everything: write your own compiler, maybe a toy OS, http server, database engine, games, ray casting, build some neural networks, fiddle with proof assistants and dependent types, write a simple mobile app, write for embedded … you go on. Place all your projects on GitHub and take pride in them: your future employer might have a look at it. Use this portfolio to your advantage.
+   
+   It is common knowledge, that recruiting a good programmer is extremely hard. Many programmers applying for jobs have trouble writing trivial things like FizzBuzz. If you have existing projects hosted on GitHub, the employer will be more assured that you are the real deal.
+
+* Expose yourself to different tools and languages
+
+   If someone tells you all languages are alike, this is either an oversimplification or a lack of experience. Let me explain that a bit.
+
+   A /model of computation/ is a set of basic operations and ways of gluing them together in order to build complex algorithms. Some languages have very similar models of computations, but some are very different.
+
+   Programming is so much bigger than your commonly known C/Python/Java/C++/C#/Go/Javascript, which are all built on the same principles: imperative, structural, with occasional bits of OOP and syntactic sugar to mimic other programming styles. The world of programming languages is huge, here is a little taste of it:
+
+   - Industrial functional programming languages with complex and well thought out type systems (Haskell, Ocaml)
+   - Functional languages with dependent types, which allow not only to program, but to write proofs of correctness (Coq, Agda, LEAN)
+   - Stack based, concatenative languages? (Forth)
+   - Logic programming (Prolog, Refal)
+   - Finite state machines (regular expressions, Promela)
+   - Heavily extensible languages allowing to implement virtually any syntax constructs, as Lisp, Forth, Camlp4/5 or Rebol allow.
+   - Domain-Specific Language workbenches such as JetBrains MPS or XText
+
+   Every new model of computations is hard to learn, because it is a new way of thinking for you. But the investment is worth your time, because once you get familiar with it:
+ 
+   - Every language based on it is easy.
+   - Every language whose model of computations has similarities is easier.
+   - As every model of computations is very fitting for specific type of problems to solve, you now have a new powerful tool, whose usage in specific contexts is orders of magnitude more productive.
+
+* Be social
+
+    I have been very fortunate to know some amazing people. My mates helped me to perfect my skills, to learn something new, to see the world from a different point of view. Isolating yourself will bring you no good in the long run: you need other people to discuss, to see what they are up to, what they think. If your mate has read an interesting article and told you about it, you just saved a lot of your own time, because he spoon-fed you with a processed, crystallized knowledge.
+   
+* Stick with passionate, smart people, and try learning from them
+
+   You will be surprised, how much you can learn during a lunch time with your mates, who are eager to share the details of their work or research. This kind of idea cross-pollination is one of the main reasons corporations like Google give you free quality food.
+   
+* Ask people who are better in coding for code reviews and read their code
+
+    Looking at someone’s work, given he is better than you, can teach you a lot, in ways you do not expect. Code reviews are even better, because the guy will tell you, how he would have written the same code. This is probably one of the most effective ways to become a better coder very, very fast.
+
+* Write tests
+
+   This is so important, that it has a section on its own. Tests are an integral part of creating software, and even guys like me who are working on formally verified software (which means it should be mathematically proven correct) are writing tests, albeit one might think, that the guarantees given by proofs are strictly stronger.
+
+
+
+
+I hope that this might actually help someone to get a bigger picture, learn faster and become a better programmer; should you have any questions, I will be glad to help. Good luck!
+

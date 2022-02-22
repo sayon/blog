@@ -1,0 +1,15 @@
+#+setupfile: ../setup/setup.org
+#+title: A beautiful intuition on associativity
+#+date: <2018-01-13>
+#+filetags: :associativity:mathematics:intuition:
+
+I found a beautiful explanation about what essential property does the associativity
+capture: You can think of each element of a monoid as having two sides. The idea
+is that the /left side and right side are independent things that don't interfere
+with each other/.
+
+For example, adding an element at the beginning of a list is independent from 
+adding something at the end of a list. These actions do not affect each other, and it doesn't
+matter which you do first. That's the idea that associativity captures.
+
+ [[https://mail.haskell.org/pipermail/haskell-cafe/2009-January/053798.html][source]]
