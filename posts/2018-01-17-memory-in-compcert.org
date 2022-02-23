@@ -166,12 +166,14 @@ px = &x
 
 ** Permissions
 
-Every address has two associated /permissions/ (access rights) [^2]. They put constraints on which operations with are allowed on it. 
+Every address has two associated /permissions/ (access rights) . They put constraints on which operations with are allowed on it. 
 
 Permissions are shown in the table below:
 
-| Permission | Read? | Write? | Free? |
-| ---        | ---   | ---    | ---   |
+
+
+| Permission | Read  | Write  | Free  |
+|------------+-------+--------+-------|
 | Freeable   | +     | +      | +     |
 | Writable   | +     | +      |       |
 | Readable   | +     |        |       |

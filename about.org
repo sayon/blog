@@ -1,4 +1,5 @@
-#+setupfile: setup/setup.org
+#+setupfile: posts/setup.org
+#+toc: nil
 
 * Hello
 My name is Igor Zhirkov, you may encounter me in Nantes, Warsaw, or St.Petersburg.
