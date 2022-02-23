@@ -1,9 +1,7 @@
 (require 'ox-publish)
-(require 'org)
-(require 'htmlize)
 
 (setq pubdir "~/public_html")
-(setq basedir "~/repos/testblog")
+(setq basedir "~/repos/blog")
 
 (defun my/link-gen (p fname label) (format "[ <a href=\"%s%s\"/> %s </a> ]" p fname label))
 (defun my/preamble-gen (p) (concat
@@ -65,7 +63,7 @@
              :html-head-include-default-style nil
              :auto-sitemap nil
              :html-head-extra "<link rel='stylesheet' type='text/css' href='css/site.css' />"
-             :html-preamble (preamble-gen "." )
+             :html-preamble (my/preamble-gen "." )
              :html-postamble nil
              )
        (list "blog-posts"
@@ -91,11 +89,12 @@
              ;; :html-head-include-scripts nil
              ;; :css-name "css/site.css"
              :html-head-extra "<link rel='stylesheet' type='text/css' href='../css/site.css' />"
-             :html-preamble (preamble-gen ".." )
+             :html-preamble (my/preamble-gen ".." )
              :sitemap-format-entry 'my/org-sitemap-date-entry-format
              :html-postamble nil
              :author "Igor Zhirkov"
              :with-creator t
+             :exclude "setup.org"
              )
        (list "blog-static"
              :base-directory basedir
@@ -109,6 +108,6 @@
        ))
 
 
-(org-publish-all )
+(org-publish-all)
 (save-window-excursion (async-shell-command "rsync -avLK ~/public_html/ rdt:~/public_html"))
 

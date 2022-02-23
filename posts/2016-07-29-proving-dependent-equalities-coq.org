@@ -1,4 +1,4 @@
-#+setupfile: ../setup/setup.org
+#+setupfile: setup.org
 #+title: Proving dependent equalities in Coq with SSReflect
 #+date: <2016-07-29>
 #+excerpt: A little trick.

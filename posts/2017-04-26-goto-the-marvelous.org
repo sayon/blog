@@ -1,4 +1,4 @@
-#+setupfile: ../setup/setup.org
+#+setupfile: setup.org
 #+title: The virtues of using goto
 #+date: <2017-04-26>
 #+excerpt: Using <code>goto</code> is marginalized in programmers community which likes the simple one-line recipes for the complex challenges of writing code. In some situations, however, using <code>goto</code> is the best tool in your box, and I will show you why.

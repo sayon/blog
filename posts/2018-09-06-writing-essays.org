@@ -1,4 +1,4 @@
-#+setupfile: ../setup/setup.org
+#+setupfile: setup.org
 #+title: Writing essays
 #+date: <2018-09-16>
 #+excerpt: Writing texts was an acquired taste for me. Here I am advicing my former self on how to become a better writer.

@@ -1,4 +1,4 @@
-#+setupfile: ../setup/setup.org
+#+setupfile: setup.org
 #+title: Proving type inequalities in Coq
 #+date: <2016-05-29>
 #+excerpt: A trick on proving inequalities of types with different numbers of inhabitants.
@@ -11,7 +11,7 @@ Sometimes you just want to prove that nasty   =~ T = U= for some types =T= and =
 The idea is simple: if types are equal, there exists a bijection between their elements. Let us prove a simple lemma =exists_bijection=: 
 
 
-$\forall A \ B: Set, A = B \rightarrow \exists f \exists g: \forall x:A \ \forall y : B, (f \ x = y -> g \ y = x )$
+$$\forall A \ B: Set, A = B \rightarrow \exists f \exists g: \forall x:A \ \forall y : B, (f \ x = y -> g \ y = x )$$
 
 #+begin_src coq
 Definition id {T} := fun x : T => x.

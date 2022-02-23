@@ -10,6 +10,8 @@
   {{{div(What I wish I have heard when I was 18.)}}}
 - {{{timestamp(11-03-2018)}}} [[file:2018-03-11-why-every-programming-student-should-learn-coq.org][Why every programming student should learn Coq]] 
   {{{div(How playing with automated theorem provers may be beneficial for developing a set of skills which is crucial to any programmer.)}}}
+- {{{timestamp(17-01-2018)}}} [[file:2018-01-17-memory-in-compcert.org][Memory in CompCert: overview]] 
+  {{{div(How memory model is described in CompCert\, a certified C compiler written in Coq and Ocaml.)}}}
 - {{{timestamp(13-01-2018)}}} [[file:2018-01-13-associativity-intuition.org][A beautiful intuition on associativity]] 
   {{{div()}}}
 - {{{timestamp(27-10-2017)}}} [[file:2017-10-27-on-teaching.org][On teaching programmers and mathematicians]] 

@@ -1,4 +1,4 @@
-#+setupfile: ../setup/setup.org
+#+setupfile: setup.org
 #+title: Advice for programming students
 #+date: <2018-03-17>
 #+excerpt: What I wish I have heard when I was 18.

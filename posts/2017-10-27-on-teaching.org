@@ -1,4 +1,4 @@
-#+setupfile: ../setup/setup.org
+#+setupfile: setup.org
 #+title: On teaching programmers and mathematicians
 #+date: <2017-10-27>
 #+excerpt: Some bits of my personal experience on teaching various subjects, specifically related to mathematics or programming.

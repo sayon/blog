@@ -1,4 +1,4 @@
-#+setupfile: ../setup/setup.org
+#+setupfile: setup.org
 #+title: Causation in modern philosophy of science
 #+date: <2016-07-16>
 #+excerpt: Cause and consequences are one of the fundamentals of human reasoning. However, these concepts are based on intuition and lack strictness and connection to the real word. This post is a quick introduction to modern causation from the philosophical point of view.

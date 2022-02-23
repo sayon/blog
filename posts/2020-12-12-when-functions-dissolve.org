@@ -1,4 +1,4 @@
-#+setupfile: ../setup/setup.org
+#+setupfile: setup.org
 #+title: When functions dissolve
 #+date: <2020-12-12>
 #+excerpt: Deconstructing the functions in the soup of assembly code.

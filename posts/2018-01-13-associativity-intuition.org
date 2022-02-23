@@ -1,4 +1,4 @@
-#+setupfile: ../setup/setup.org
+#+setupfile: setup.org
 #+title: A beautiful intuition on associativity
 #+date: <2018-01-13>
 #+filetags: :associativity:mathematics:intuition:

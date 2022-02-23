@@ -1,4 +1,4 @@
-#+setupfile: ../setup/setup.org
+#+setupfile: setup.org
 #+title: Why every programming student should learn Coq
 #+date: <2018-03-11 Sat>
 #+excerpt: How playing with automated theorem provers may be beneficial for developing a set of skills which is crucial to any programmer.

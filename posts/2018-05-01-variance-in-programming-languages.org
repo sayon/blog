@@ -1,4 +1,4 @@
-#+setupfile: ../setup/setup.org
+#+setupfile: setup.org
 #+title: Variance in programming languages
 #+date: <2018-05-01>
 #+excerpt: Concepts of variance and contravariance in type systems of programming languages.
