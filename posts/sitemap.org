@@ -1,5 +1,7 @@
 #+TITLE: rubber duck typing
 
+- {{{timestamp(22-03-2022)}}} [[file:2022-03-22-job.org][Job offers are welcome]] 
+  {{{div(Due to recent events I am heading from academia to RnD and hence open to job offers.)}}}
 - {{{timestamp(12-12-2020)}}} [[file:2020-12-12-when-functions-dissolve.org][When functions dissolve]] 
   {{{div(Deconstructing the functions in the soup of assembly code.)}}}
 - {{{timestamp(16-09-2018)}}} [[file:2018-09-06-writing-essays.org][Writing essays]] 

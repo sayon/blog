@@ -1,0 +1,26 @@
+#+setupfile: setup.org
+#+title: Job offers [RnD, compilers, PLT, systems] are welcome
+#+date: <2022-03-22>
+#+excerpt: Due to recent events I am heading from academia to RnD and hence open to job offers.
+
+
+The time has come for me to work in Europe again.
+
+For the last couple of years I was residing in Poland and France, but my main occupation was reforming a curriculum for system architects in ITMO university in St.-Petersburg, Russia.
+Our idea was to create a novel curriculum in Computer Science and Engineering tying together the science of complex systems, programming, computer system architecture and strong mathematical foundations.
+Quite a task if you ask me! The works connecting complex systems and software/system engineering are quite scarce at the moment.
+
+We were lucky to start to assemble a great team of young and more seasoned professionals, passionate and smart students.
+The level of education went up considerably, we have provided a vision and clearer goals towards a unique curriculum.
+Sadly, due to the war I have to limit my engagement in this project and hence I am looking for a work to hone my hard skills.
+
+I am looking for a job in Warsaw, France (remotely) or anywhere in EU (also remotely, or mostly).
+My main area of interests includes compilers, programming language theory, formal semantics, programming language design, system design.
+I like problems related to organizing code, systems, I know and understand the low level reasonably well (and have even written [[https://www.amazon.com/Low-Level-Programming-Assembly-Execution-Architecture/dp/1484224027][a book]] about it).
+I would love to do some R&D requiring some interesting mathematics and writing code. I do love maths and studying -- the big part of my life problems were consequences of poor work/life balance, but thankfully this part is past me.
+
+I have studied in ITMO university and Academic University of Saint-Petersburg. Then I have done research in IMT atlantique in Nantes, where I was proving correctness of some refactorings of the C language formally, using the formal semantics of CompCert verified C compiler.
+
+[[[https://rubber-duck-typing.com/files/cv.pdf][my CV]]]
+
+Write me a [[mailto:igorjirkov@gmail.com][mail]] if you have a project where I could be of a use.
