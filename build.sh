@@ -1,2 +1,2 @@
-emacs --batch -l ./export.el && rsync -avLK ~/public_html/ rdt:~/public_html
-
+emacs --batch -l ./export.el
+# Tweak export.el to publish the blog to the right address
