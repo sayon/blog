@@ -98,7 +98,7 @@
              )
        (list "blog-static"
              :base-directory basedir
-             :base-extension "css\\|js\\|png\\|jpg\\|gif\\|pdf\\|mp3\\|ogg\\|swf"
+             :base-extension "css\\|js\\|png\\|jpg\\|gif\\|pdf\\|mp3\\|ogg\\|swf\\|svg"
              :publishing-directory pubdir
              :excluded '("setup" "posts")
              :recursive t
