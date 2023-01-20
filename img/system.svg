@@ -1,0 +1,216 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<!-- Created with Inkscape (http://www.inkscape.org/) -->
+
+<svg
+   width="83.589439mm"
+   height="49.270481mm"
+   viewBox="0 0 83.58944 49.270482"
+   version="1.1"
+   id="svg5"
+   inkscape:version="1.1.1 (3bf5ae0d25, 2021-09-20)"
+   sodipodi:docname="system.svg"
+   xmlns:inkscape="http://www.inkscape.org/namespaces/inkscape"
+   xmlns:sodipodi="http://sodipodi.sourceforge.net/DTD/sodipodi-0.dtd"
+   xmlns="http://www.w3.org/2000/svg"
+   xmlns:svg="http://www.w3.org/2000/svg">
+  <sodipodi:namedview
+     id="namedview7"
+     pagecolor="#ffffff"
+     bordercolor="#666666"
+     borderopacity="1.0"
+     inkscape:pageshadow="2"
+     inkscape:pageopacity="0.0"
+     inkscape:pagecheckerboard="0"
+     inkscape:document-units="mm"
+     showgrid="false"
+     inkscape:snap-smooth-nodes="true"
+     inkscape:snap-midpoints="true"
+     inkscape:snap-intersection-paths="true"
+     inkscape:object-paths="true"
+     inkscape:zoom="5.423513"
+     inkscape:cx="207.24575"
+     inkscape:cy="111.45912"
+     inkscape:window-width="3840"
+     inkscape:window-height="2060"
+     inkscape:window-x="0"
+     inkscape:window-y="27"
+     inkscape:window-maximized="1"
+     inkscape:current-layer="layer1" />
+  <defs
+     id="defs2">
+    <marker
+       style="overflow:visible"
+       id="Arrow1Mend"
+       refX="0"
+       refY="0"
+       orient="auto"
+       inkscape:stockid="Arrow1Mend"
+       inkscape:isstock="true">
+      <path
+         transform="matrix(-0.4,0,0,-0.4,-4,0)"
+         style="fill:context-stroke;fill-rule:evenodd;stroke:context-stroke;stroke-width:1pt"
+         d="M 0,0 5,-5 -12.5,0 5,5 Z"
+         id="path8447" />
+    </marker>
+    <marker
+       style="overflow:visible"
+       id="Arrow1Mstart"
+       refX="0"
+       refY="0"
+       orient="auto"
+       inkscape:stockid="Arrow1Mstart"
+       inkscape:isstock="true">
+      <path
+         transform="matrix(0.4,0,0,0.4,4,0)"
+         style="fill:context-stroke;fill-rule:evenodd;stroke:context-stroke;stroke-width:1pt"
+         d="M 0,0 5,-5 -12.5,0 5,5 Z"
+         id="path8444" />
+    </marker>
+    <marker
+       style="overflow:visible"
+       id="Arrow1Lstart"
+       refX="0"
+       refY="0"
+       orient="auto"
+       inkscape:stockid="Arrow1Lstart"
+       inkscape:isstock="true">
+      <path
+         transform="matrix(0.8,0,0,0.8,10,0)"
+         style="fill:context-stroke;fill-rule:evenodd;stroke:context-stroke;stroke-width:1pt"
+         d="M 0,0 5,-5 -12.5,0 5,5 Z"
+         id="path8438" />
+    </marker>
+  </defs>
+  <g
+     inkscape:label="Layer 1"
+     inkscape:groupmode="layer"
+     id="layer1"
+     transform="translate(-18.048607,-104.85892)">
+    <circle
+       style="fill:#f2f2f2;stroke:#000000;stroke-width:0.217184"
+       id="path8079"
+       cx="58.617329"
+       cy="130.94981"
+       r="23.070995" />
+    <circle
+       style="fill:#ffffff;stroke:#000000;stroke-width:0.2"
+       id="path5030"
+       cx="44.994228"
+       cy="129.18134"
+       r="4.8784494" />
+    <circle
+       style="fill:#ffffff;stroke:#000000;stroke-width:0.2"
+       id="circle5116"
+       cx="71.69648"
+       cy="118.50043"
+       r="4.8784494" />
+    <circle
+       style="fill:#ffffff;stroke:#000000;stroke-width:0.2"
+       id="circle5122"
+       cx="60.869228"
+       cy="145.05635"
+       r="4.8784494" />
+    <text
+       xml:space="preserve"
+       style="font-size:3.52777px;line-height:4.40971px;font-family:sans-serif;stroke-width:0.264583"
+       x="43.72583"
+       y="130.30338"
+       id="text2512"><tspan
+         sodipodi:role="line"
+         id="tspan2510"
+         style="stroke-width:0.264583"
+         x="43.72583"
+         y="130.30338">A</tspan></text>
+    <text
+       xml:space="preserve"
+       style="font-size:3.52777px;line-height:4.40971px;font-family:sans-serif;stroke-width:0.264583"
+       x="70.428085"
+       y="119.62247"
+       id="text5114"><tspan
+         sodipodi:role="line"
+         id="tspan5112"
+         style="stroke-width:0.264583"
+         x="70.428085"
+         y="119.62247">B</tspan></text>
+    <text
+       xml:space="preserve"
+       style="font-size:3.52777px;line-height:4.40971px;font-family:sans-serif;stroke-width:0.264583"
+       x="59.600834"
+       y="146.17839"
+       id="text5120"><tspan
+         sodipodi:role="line"
+         id="tspan5118"
+         style="stroke-width:0.264583"
+         x="59.600834"
+         y="146.17839">C</tspan></text>
+    <path
+       style="fill:none;stroke:#000000;stroke-width:0.264583px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1;marker-start:url(#Arrow1Mstart);marker-end:url(#Arrow1Mend)"
+       d="m 49.444692,127.18317 17.732351,-6.84591"
+       id="path8354" />
+    <path
+       style="fill:none;stroke:#000000;stroke-width:0.264583px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1;marker-start:url(#Arrow1Mstart);marker-end:url(#Arrow1Mend)"
+       d="m 70.455016,123.21827 -7.498361,17.42878"
+       id="path8356" />
+    <text
+       xml:space="preserve"
+       style="font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;font-size:3.52777px;line-height:1.25;font-family:'Noto Sans Mono';-inkscape-font-specification:'Noto Sans Mono';stroke-width:0.264583"
+       x="69.439682"
+       y="107.77076"
+       id="text9572"><tspan
+         sodipodi:role="line"
+         id="tspan9570"
+         style="font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;font-family:'Noto Sans Mono';-inkscape-font-specification:'Noto Sans Mono';stroke-width:0.264583"
+         x="69.439682"
+         y="107.77076">Border</tspan></text>
+    <text
+       xml:space="preserve"
+       style="font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;font-size:3.52777px;line-height:1.25;font-family:'Noto Sans Mono';-inkscape-font-specification:'Noto Sans Mono';stroke-width:0.264583"
+       x="18.17329"
+       y="108.16624"
+       id="text9572-3"><tspan
+         sodipodi:role="line"
+         id="tspan9570-0"
+         style="font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;font-family:'Noto Sans Mono';-inkscape-font-specification:'Noto Sans Mono';stroke-width:0.264583"
+         x="18.17329"
+         y="108.16624">Outside</tspan><tspan
+         sodipodi:role="line"
+         style="font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;font-family:'Noto Sans Mono';-inkscape-font-specification:'Noto Sans Mono';stroke-width:0.264583"
+         x="18.17329"
+         y="112.57595"
+         id="tspan5242">world</tspan></text>
+    <g
+       id="g5369">
+      <text
+         xml:space="preserve"
+         style="font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;font-size:3.52777px;line-height:1.25;font-family:'Noto Sans Mono';-inkscape-font-specification:'Noto Sans Mono';stroke-width:0.264583"
+         x="18.17329"
+         y="108.16624"
+         id="text5364"><tspan
+           sodipodi:role="line"
+           id="tspan5360"
+           style="font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;font-family:'Noto Sans Mono';-inkscape-font-specification:'Noto Sans Mono';stroke-width:0.264583"
+           x="18.17329"
+           y="108.16624">Outside</tspan><tspan
+           sodipodi:role="line"
+           style="font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;font-family:'Noto Sans Mono';-inkscape-font-specification:'Noto Sans Mono';stroke-width:0.264583"
+           x="18.17329"
+           y="112.57595"
+           id="tspan5362">world</tspan></text>
+    </g>
+    <text
+       xml:space="preserve"
+       style="font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;font-size:3.52777px;line-height:1.25;font-family:'Noto Sans Mono';-inkscape-font-specification:'Noto Sans Mono';stroke-width:0.264583"
+       x="50.093273"
+       y="117.728"
+       id="text9572-9"><tspan
+         sodipodi:role="line"
+         id="tspan9570-5"
+         style="font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;font-family:'Noto Sans Mono';-inkscape-font-specification:'Noto Sans Mono';stroke-width:0.264583"
+         x="50.093273"
+         y="117.728">System</tspan></text>
+    <path
+       style="fill:none;stroke:#000000;stroke-width:0.264583;stroke-linecap:butt;stroke-linejoin:miter;stroke-miterlimit:4;stroke-dasharray:0.264583, 0.264583;stroke-dashoffset:0;stroke-opacity:1"
+       d="m 67.60623,109.70198 1.931014,-1.39459 h 12.501885"
+       id="path5685" />
+  </g>
+</svg>

@@ -1,28 +1,34 @@
 #+TITLE: rubber duck typing
 
-- {{{timestamp(22-03-2022)}}} [[file:2022-03-22-job.org][Job offers are welcome]] 
+- {{{timestamp(19-01-2023)}}} [[file:2023-01-19-note-taking.org][My note-taking process]]
+  {{{div(A workflow of reading\, annotating\, and note-keeping.)}}}
+- {{{timestamp(26-07-2022)}}} [[file:2022-07-26-systems-1.org][Programming languages and computer systems (1)]]
+  {{{div(A first post in a series about computer systems\, their design and the role of programming languages.)}}}
+- {{{timestamp(22-03-2022)}}} [[file:2022-03-22-job.org][Job offers [RnD, compilers, PLT, systems] are welcome]]
   {{{div(Due to recent events I am heading from academia to RnD and hence open to job offers.)}}}
-- {{{timestamp(12-12-2020)}}} [[file:2020-12-12-when-functions-dissolve.org][When functions dissolve]] 
+- {{{timestamp(12-12-2020)}}} [[file:2020-12-12-when-functions-dissolve.org][When functions dissolve]]
   {{{div(Deconstructing the functions in the soup of assembly code.)}}}
-- {{{timestamp(16-09-2018)}}} [[file:2018-09-06-writing-essays.org][Writing essays]] 
+- {{{timestamp(16-09-2018)}}} [[file:2018-09-06-writing-essays.org][Writing essays]]
   {{{div(Writing texts was an acquired taste for me. Here I am advicing my former self on how to become a better writer.)}}}
-- {{{timestamp(01-05-2018)}}} [[file:2018-05-01-variance-in-programming-languages.org][Variance in programming languages]] 
+- {{{timestamp(01-05-2018)}}} [[file:2018-05-01-variance-in-programming-languages.org][Variance in programming languages]]
   {{{div(Concepts of variance and contravariance in type systems of programming languages.)}}}
-- {{{timestamp(17-03-2018)}}} [[file:2018-03-17-advice-for-programming-students.org][Advice for programming students]] 
+- {{{timestamp(17-03-2018)}}} [[file:2018-03-17-advice-for-programming-students.org][Advice for programming students]]
   {{{div(What I wish I have heard when I was 18.)}}}
-- {{{timestamp(11-03-2018)}}} [[file:2018-03-11-why-every-programming-student-should-learn-coq.org][Why every programming student should learn Coq]] 
+- {{{timestamp(11-03-2018)}}} [[file:2018-03-11-why-every-programming-student-should-learn-coq.org][Why every programming student should learn Coq]]
   {{{div(How playing with automated theorem provers may be beneficial for developing a set of skills which is crucial to any programmer.)}}}
-- {{{timestamp(17-01-2018)}}} [[file:2018-01-17-memory-in-compcert.org][Memory in CompCert: overview]] 
+- {{{timestamp(17-01-2018)}}} [[file:2018-01-17-memory-in-compcert.org][Memory in CompCert: overview]]
   {{{div(How memory model is described in CompCert\, a certified C compiler written in Coq and Ocaml.)}}}
-- {{{timestamp(13-01-2018)}}} [[file:2018-01-13-associativity-intuition.org][A beautiful intuition on associativity]] 
+- {{{timestamp(13-01-2018)}}} [[file:2018-01-13-associativity-intuition.org][A beautiful intuition on associativity]]
   {{{div()}}}
-- {{{timestamp(27-10-2017)}}} [[file:2017-10-27-on-teaching.org][On teaching programmers and mathematicians]] 
+- {{{timestamp(27-10-2017)}}} [[file:2017-10-27-on-teaching.org][On teaching programmers and mathematicians]]
   {{{div(Some bits of my personal experience on teaching various subjects\, specifically related to mathematics or programming.)}}}
-- {{{timestamp(26-04-2017)}}} [[file:2017-04-26-goto-the-marvelous.org][The virtues of using goto]] 
+- {{{timestamp(18-07-2017)}}} [[file:2017-07-18-rene-magritte.org][Impressions of René Magritte]]
+  {{{div(Some bits of my personal experience on teaching various subjects\, specifically related to mathematics or programming.)}}}
+- {{{timestamp(26-04-2017)}}} [[file:2017-04-26-goto-the-marvelous.org][The virtues of using goto]]
   {{{div(Using <code>goto</code> is marginalized in programmers community which likes the simple one-line recipes for the complex challenges of writing code. In some situations\, however\, using <code>goto</code> is the best tool in your box\, and I will show you why.)}}}
-- {{{timestamp(29-07-2016)}}} [[file:2016-07-29-proving-dependent-equalities-coq.org][Proving dependent equalities in Coq with SSReflect]] 
+- {{{timestamp(29-07-2016)}}} [[file:2016-07-29-proving-dependent-equalities-coq.org][Proving dependent equalities in Coq with SSReflect]]
   {{{div(A little trick.)}}}
-- {{{timestamp(16-07-2016)}}} [[file:2016-07-16-causation-overview.org][Causation in modern philosophy of science]] 
+- {{{timestamp(16-07-2016)}}} [[file:2016-07-16-causation-overview.org][Causation in modern philosophy of science]]
   {{{div(Cause and consequences are one of the fundamentals of human reasoning. However\, these concepts are based on intuition and lack strictness and connection to the real word. This post is a quick introduction to modern causation from the philosophical point of view.)}}}
-- {{{timestamp(29-05-2016)}}} [[file:2016-05-29-how-to-prove-type-inequalities-coq.org][Proving type inequalities in Coq]] 
+- {{{timestamp(29-05-2016)}}} [[file:2016-05-29-how-to-prove-type-inequalities-coq.org][Proving type inequalities in Coq]]
   {{{div(A trick on proving inequalities of types with different numbers of inhabitants.)}}}

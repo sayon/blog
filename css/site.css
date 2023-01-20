@@ -64,7 +64,7 @@ body a:hover {
   text-decoration: underline;
 }
 body pre {
-  background: white;
+  background: rgb(230,230,230);
 }
 body pre.src {
   overflow-y: auto !important;

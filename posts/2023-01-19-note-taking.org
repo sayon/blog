@@ -1,0 +1,310 @@
+#+setupfile: setup.org
+#+title: My note-taking process
+ #+date: <2023-01-19>
+  #+excerpt: A workflow of reading, annotating, and note-keeping.
+  #+filetags: :education:self-improvement:reading:
+
+
+  There is a (toxic) productivity hype on YouTube.
+  Everyone is making a video about it, explaining, how to achieve all great things in 24 hours.
+  Apparently, it is mandatory to use Obsidian or Notion, waking up at 4AM, thanking every object in the room, going for a
+  jog and only then starting your work day.
+  I do not think that I am particularly productive, but I am certainly more
+  productive then /some/, so for them and for the curious I am writing this post.
+
+* Structure
+I have spent several years in trying to perfect a system that could work for me.
+While it is not ideal and does not work as good as I want, it /actually works for
+months now/, which is a great progress for me.
+It has also brought more order into my life, eliminated friction and helped systematize
+all my intellectual activities.
+
+The main components of my system are:
+
+1) Zettelkasten, stored in a git repository and organized in Emacs with =org-mode= and =org-roam=.
+2) Book storage: cloud storage with digital articles and books, and a bookshelf
+   with physical books.
+3) Galaxy Tab7 FE, an Android tablet with a stylus to keep a working set of
+   documents and annotate them.
+4) An e-ink reader, which mirrors a part of my collection of books.
+
+The main stages of my workflow are:
+
+- Reading/watching and making notes as I go.
+- Revising, copying notes to my long-term note storage.
+
+Now, to the details.
+
+* Data flow
+
+Most of the time, I study by reading books, articles, and blog posts.
+Watching videos is less convenient, but sometimes I have no choice.
+I will illustrate the workflow on an example of a physical book.
+
+** Introduction to the source
+
+First, I need to get a general idea of what is happening in the book.
+Linear reading is inconvenient for the task, so we need to approach the text structurally.
+
+To begin, I am looking at the table of contents, skimming through pages, reading
+the section headers, sometimes section introductions.
+It is enjoyable doing this with a physical book!
+
+Often, the book is either not entirely new for me, or only some chapters are
+useful ---  it is necessary to identify them before you actually read the book.
+This stage is even more important if the book is not an easy reading: sometimes,
+getting through every single page may require an extensive research and exhausting
+thinking.
+
+My goals at this stage are:
+
+1. Familiarize myself with the book structure.
+2. Ask Google/ChatGPT about the meaning of unknown technical terms.
+3. Identify my goals in reading this specific book.
+4. Think for a moment about the questions that appear in my head after skimming
+   through the book.
+
+Some books are going an extra mile to guide the reader, for example,
+[[https://thenetworkstate.com/]["The Network State"]]  starts with sections "The book in one sentence", "The book
+in one image", "The book in one thousand words", and "The book in one essay".
+This is a didactic approach that I am also using with my students: guide to
+ideas through a series of increasingly detailed approximations.
+
+** Annotating the source
+
+Once I have a general idea of what to expect from the book, I start reading and
+annotating it.
+As a kid, I was reading really fast and with extremely poor retention, so now if I am
+serious about working through the text, I am annotating it.
+I use a set of four pencils: violet, blue, red, and green, and four highlighters of the same colors.
+When something picks my interest, I highlight a fragment of text with one of
+these colors and write text on margins in the same color. This way a commentary
+is matched to a fragment.
+
+There is a logic to color coding:
+
++ *Violet* is for summarizing. It is well visible on paper and also
+  distinguishable from black, so it does not fuse with the text.
+
+  It is *not useful* to highlight without commenting. For me, writing summary is
+  a useful part, and highlighting is optional [fn:1].
+
++ *Blue* is for connections. It reminds me of hyperlinks on Web pages.
+  With blue I mark reasonable connections to other topics, writers, or books.
+  Connections greatly enhance retention.
+
++ *Red* is for questions and critique. It attracts the most attention and is
+  associated with danger. I use it if I do not agree with something written, or
+  if I do not understand it.
+
++ *Green* is for everything else. It is a safe, a bit disconnected color. If my
+  curiosity suggests me a possible connection to my previous readings, if I get
+  an idea on how to solve some problem, an analogy, a metaphor, then it is worth
+  noting it. Basically, this is the color for everything else.
+
+I am never waiting to finish one book before starting another, so my working set
+of sources is usually large.
+It helps establishing more connections; sometimes, it also enhances
+understanding, since I am exposed to several explanations of the same concepts,
+often from different points of view.
+
+[[../img/book-annotated.jpeg]]
+
+Every now and then I revise the notes to add information to my permanent note storage.
+
+** Storing notes
+
+The core of my system is Zettelkasten.
+In short, it is a personal Wiki with small subjective articles
+and annotated subjective connections between them.
+Each "wiki article" is a note on something: a concept, an idea, a book, an article
+etc.
+After some reading, it is time to revise my notes, skimming through
+the book again, and put bits of notes to the appropriate articles.
+
+For me, there are advantages of taking notes in two stages:
+
+- It forces me to come back to notes in a systemic way; I quickly re-read,
+  discover things that I miss and memorize information again.
+- It combines the advantages of hand-writing (good for retention, sheets are more "personal", stimulates thinking) and digital note-taking
+  (speed, ease of searching, version control, digital illustrations, etc).
+
+Subjectively, I have noticed that I remember more since I have started doing two
+stages, as opposed to just writing digital textual notes right away.
+
+
+I use =emacs= with =org-roam= to keep my Zettelkasten organized, easily search through them and
+explore them with =org-roam-ui=.
+
+
+Here is an example of a note:
+
+[[../img/emacs-zettel-example.png]]
+
+... and its source code:
+
+#+begin_src
+:PROPERTIES:
+:ID:       22AF419C-C79F-42A6-B7E9-CF7A27DAD5E0
+:END:
+,#+title: System
+,#+filetags: #system-engineering
+
+,* Definition
+A system is something that consists of parts, functions and has emergent properties.
+
+,*  Other definitions
+
+#+begin_quote
+\dots any organized *assembly* of resources and procedures united and regulated by
+*interaction of interdependence* to accomplish a set of specific functions
+-- DoDAS (Department of Defense Architecture Framework)
+#+end_quote
+
+
+#+begin_quote
+\dots a construct or collection of different entities that together produce results
+not obtainable by the entities alone.
+-- INCOSE
+#+end_quote
+
+
+
+Human-crafted systems have goals.
+
+,* Related
+
+- In order to create systems it is necessary to engage in
+  "[[id:4C0E5272-CC97-40B5-BA56-FD15F83B23B8][Systems thinking]]"
+
+#+setupfile: org-header.org
+#+created: [2022-11-18 Fri]
+#+last_modified: [2022-11-18 Fri 12:16]
+
+#+end_src
+
+
+The note contains:
+
+1) An identifier for =org-roam= (generated automatically)
+   #+begin_src
+:PROPERTIES:
+:ID:       22AF419C-C79F-42A6-B7E9-CF7A27DAD5E0
+:END:
+   #+end_src
+2) Title
+3) Tags (we can then search by them)
+4) Sections with content. Text supports markup: underline/bold/italic,
+   monospace, strike-through and alike; it may contain pictures (there is a
+   convenient way of including shot of a part of the screen through
+   =org-download-screenshot=).
+5) A special section for connections to other notes
+   Personally, I am also putting links to other notes directly into the body of
+   the note. The special section is precious to provide subjective annotations for
+   the links: why do I think there is a connection between this note and another
+   one.
+
+I used to have two sections: for links to the sources, and for related notes, but now I tend
+to just merge both into "Related".
+
+I keep most metadata out of the way by putting it in the end of the note.
+
+* What about digital sources?
+
+I am doing a lot of reading on my tablet as well, because I have most books and
+articles only in digital format.
+For that, I have bought Samsung Galaxy Tab7 Fan Edition this summer, and it is
+just really good for me:
+
+- The screen is big (and I never felt like I have enough screen space for
+  comfortable handwriting before)
+- Samsung S-Pen feels good to me, better than Apple pencil. The feel is a bit
+  closer to the fountain pen, which is my writing tool of preference on paper.
+- The performance is adequate for everything I need.
+
+ [[../img/pen-of-choice.jpeg]]
+
+ [[../img/tablet-book.jpeg]]
+
+
+
+As for software, I found that Flexcil works best for me.
+It does not choke when I am keeping 40 tabs with documents open, is responsive
+and easily handles even huge books like
+[[http://www.topology.org/tex/conc/dg.html][Differential geometry reconstructed]], which has around 2500 pages as of today.
+
+The editing capabilities are not great, e.g. you can not rotate your handwritten
+text, and the Android version lacks a good synchronization mechanism -- you
+basically have to do backups and restore them.
+The backup process is fast, so I am doing it most of the days.
+Once these things get fixed, it will become an ideal tool for me.
+
+For the pleasure reading, when I am not annotating, I prefer using my
+old e-ink reader PocketBook 902, which has a reasonably big screen.
+It has now turned 12 years old, and still works like a charm.
+
+[[../img/bookreader.jpeg]]
+
+I was considering buying an e-ink tablet for annotating, but I find that having
+color on annotation is too great. The current color e-ink tablets were not
+convincing to me for various reasons.
+
+
+* Pitfalls
+
+- Do not try to create a hierarchy (taxonomy) for your notes. It is not
+  scalable and only works for narrow domain. Prefer tags.
+
+- I did not perceive this system as too complicated, until I have written this
+  post. Start small, build a habit, grow as you see fit.
+
+- Without habit, Zettelkasten will stay empty. You may need to force yourself to
+  stop reading at some point, revise your notes and put them to the permanent
+  database.
+  Do not delay until you forget the source and recalling the information will be
+  difficult.
+
+- Redundancy is good. You will naturally put the same information in many notes,
+  and *it is all right*.
+
+- Drawing is great. Emacs and org notes support =.svg= files, but you can also include
+  photos or screenshots of your hand-drawn diagrams, why not.
+- Think carefully which software you will be using (if any).
+  It is great to have
+  the second brain for life.
+  My first digital notes were in some note-taking app for Symbian
+  OS, then in Evernote.
+  These programs are proprietary and do not always have an easy way for you to migrate your notes somewhere else.
+  Emacs (and text files) is clearly not everyone's darling, but it has been around for more, than
+  I am alive, so I am quite certain that:
+  - either I will be able to keep my notes there for life,
+  - or I will be able to migrate them somewhere should such need arise.
+
+
+#+begin_export html
+<div id="disqus_thread"></div>
+<script>
+    var disqus_config = function () {
+    this.page.url = "https://rubber-duck-typing.com/posts/2023-01-19-note-taking.html";
+    this.page.identifier = "2023-01-19-note-taking";
+    };
+    */
+    (function() { // DON'T EDIT BELOW THIS LINE
+    var d = document, s = d.createElement('script');
+    s.src = 'https://rubber-duck-typing-com-1.disqus.com/embed.js';
+    s.setAttribute('data-timestamp', +new Date());
+    (d.head || d.body).appendChild(s);
+    })();
+</script>
+<noscript>Please enable JavaScript to view the <a href="https://disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript>
+
+#+end_export
+
+
+* Footnotes
+
+[fn:1] Most texts are not too dense and include a fair percentage of redundancy,
+so you can summarize them in a useful way. There are, of course, exceptions, for
+example, /Tractatus Logico-Philosophicus/ of Ludwig Wittgenstein, where the book
+is a structured tree of key points of his word view from that time. In this case
+I had to keep the annotations separated from the book.

@@ -5,46 +5,65 @@
 #+filetags: :assembly:programming:systems:
 
 In this post we are going to explore how the notion of function loses its
-significance as an abstracted module of program logic when we pass from a higher
+significance as an abstracted module of program logic when we compile a higher
 level imperative language to the assembly code.
 
 In imperative programming, functions isolate pieces of program logic.
-For example, in C-like language, the following function would increase its argument and return its value.
+For example, in C-like language, the following function would increase its
+argument by one and return its value.
 
 
-#+begin_src c
-int f( int x ) {
-   return x + 1;
-}
+#+begin_src C
+  int f( int x ) {
+     return x + 1;
+  }
 #+end_src
 
 Ideally, each function should have a single, well-defined goal and only contain the code both necessary and sufficient to accomplish the said goal.
 
-* Modularity 
+* Modularity
 
-There is a concept of *modularity* in system design. 
-It means that to construct a system we start with smaller building blocks, which are built in isolation. 
-Then we assemble the bigger system from these blocks.
+Imagine we have several programs running in parallel on the same computer.
+Each program is a component of this computer system.
 
-Modularity can be more or less pronounced:
+If these programs are threads of the same process, they are sharing the same
+address space.
+Therefore, one program can affect the functioning of another by corrupting its
+memory structures, either deliberately or by mistake.
+On the other hand, if the each program is running in a separate process, it has
+its own virtual address space.
+Then an error in one process will not influence the memory of another process,
+provided they are not engaged in any other interactions.
+There are of course details to that, like what happens when a process crashes
+while another one is waiting for its response, but such situations can be dealt
+with in a reasonable way e.g. through timeouts.
 
-- *soft modularity* --- errors inside one module can propagate to other modules. This propagation is out of control and leads to unpredictable consequences.
-- *strong modularity* --- modules are more isolated and the error propagation is limited.
+
+There is a concept of *modularity* in system design.
+It means that to construct a system we start with smaller building blocks, which are built in isolation.
+Then we assemble the bigger system from these blocks, setting up connections
+between them.
+
+In the example, we see two degrees of modularity.
+When programs share their address space, the modularity is *softer*, it does not
+prevent unintended interactions from happening.
+An error in one program (module) can then affect other programs, disrupt their
+functioning and lead to more errors.
+This error propagation is out of control and leads to unpredictable consequences.
+
+On the other hand, programs in different processes are less fragile.
+Then the modularity is *stronger*.
+
+To sum it up:
+
+- weak, soft modularity :: errors inside one module can propagate to other
+  modules bypassing interfaces.
+- strong modularity :: modules are more isolated and the error propagation is
+  limited to the interfaces.
 
 These two notions are pure and extreme, real systems often fall somewhere in
 between.
 
-An example of soft and strong modularity is seen in a computer which executes
-several programs in parallel.
-Each process is a component of a running system. 
-If the processes share the same address space then an error in one process can lead to a data corruption of another.
-The modularity is then soft.
-If the processes have isolated virtual address spaces then an error in one
-process can not influence the memory of another.
-Then the modularity is stronger.
-There are of course details to that, like what happens when a process crashes
-while another one is waiting for its response, but such situations can be dealt
-with in a reasonable way e.g. through timeouts.
 
 ** Functions as modules
 
@@ -53,50 +72,51 @@ Functions abstract away the complexity: a caller provides them with arguments,
 and the function yields the computation result plus side-effects, like file
 output.
 
-In a high level language functions give us some reasonable modularity (if we do
-not use global variables or resources).
+In a high level programming language, functions give us some reasonable
+modularity (if we do not use global variables or resources).
 Any function can communicate failure to its caller through returning errors:
-=NULL=, instances of optional types etc. (or through exceptions).
+=NULL=, instances of optional types, or through exceptions.
 
 ** Higher level functions and lower level subroutines
 
-The source code is eventually transformed into machine code. Without too much
-oversimplification, functions in higher level languages are translated into
-functions in machine code. To make a distinction between them we will
-call these lower level assembly functions *subroutines*.
+The source code is eventually compiled into machine code.
+Without too much oversimplification, functions in higher level languages are translated into
+functions in machine code.
+To make a distinction between them we will call these lower level assembly functions *subroutines*.
 
 Subroutines should support two kinds of operations:
 
 - we should be able to call subroutines from anywhere, and
 - subroutines should be able to return to the place where they have been called.
 
-On common architectures there are instructions or instruction patterns that are
-used to call subroutines and return from them, like =call=/=ret= on Intel 64, or
-=bl=/=pop pc= on ARM. 
+On common architectures, there are instructions or instruction patterns that are
+used to call subroutines and return from them, like =call= / =ret= on Intel 64, or
+=bl= / =pop pc= on ARM.
 
-The subroutines are different from functions as we perceive them in one important way:
-subroutines operate in a common memory space with each other.
-Functions have local variables and arguments, but subroutines are forced to use
+Subroutines are different from functions in one important way:
+subroutines only operate in a common memory space and do not have their own isolated
+piece of memory.
+Functions have local variables and arguments; subroutines can allocate space on
+stack just for themselves, but are forced to use
 CPU registers, which are global and shared among them.
 
 To make an analogy with higher-level language, imagine that:
 
 - all your functions accept zero arguments;
 - you are not allowed to create local variables;
+- you have a limited amount of global variables;
 - you have to repurpose the same global variables in different functions.
 
 Because of this, modularity supported by subroutines is even "softer" than the function modularity.
-In fact, I wonder if we can talk about any modularity at all (except that each
+I wonder if, in this case, we can talk about any modularity at all (except that each
 subroutine is written in one place in the source code which makes a subroutine a
 structural module).
 Maybe the better way to think about subroutines is to accept that they do not exist.
 Once we get there, we may better understand how assembly programs are written,
 how they function and what possibilities it offers to us.
 
-* Exemplary assembly program
-
 The rest of this post uses the assembly code as a device to tell about two
-interesting concepts: tail-call elimination and coroutines. 
+interesting concepts: tail-call elimination and coroutines.
 We are going to optimize the subroutine =print_newline= in several stages up to
 the point that it is going to lose its shape as an isolated subroutine and get
 reduced to one instruction.
@@ -104,21 +124,27 @@ reduced to one instruction.
 
 #+begin_src asm
 ; Gets symbol code in rdi and writes it in stdout
-print_char: 
+print_char:
    ...
    ; the code of print_char is not important to us
    ...
    ret
 
 ; Prints newline character
-print_newline: 
-    mov rdi, 0xA          ; code 
+print_newline:
+    mov rdi, 0xA          ; code
     call print_char
     ret
 #+end_src
 
+The subroutine =print_newline= is just an adapter for =print_char=:
 
-** Tail call optimization
+#+begin_src c
+  void print_newline() {
+    print_char(0xA);
+      }
+#+end_src
+* Tail call optimization
 
 Tail call happens when the subroutine ends with a call to another subroutine.
 In the higher level language this happens in cases such as:
@@ -127,8 +153,8 @@ In the higher level language this happens in cases such as:
 void g();
 
 void f() {
-    g(); 
-    return; 
+    g();
+    return;
 }
 #+end_src
 
@@ -138,25 +164,28 @@ This is also a tail call, because we just return what another function returns:
 int g(int x);
 
 int f() {
-    return g(42); 
+    return g(42);
 }
 #+end_src
 
-This is not a tail call: after calling function we have to multiply its result to another number. 
+This is not a tail call: after calling function we have to multiply its result
+to another number.
+We wait until =fact(n-1)= completes its execution, and then use its result in
+other computations.
 Note that in this example the function calls itself rather than some other
-function, but this is not important.
+function, but this is unimportant.
 
 #+begin_src c
 int fact( int n ) {
   if (n < 2) return 1;
   return n * fact(n-1);
-} 
+}
 #+end_src
 
 On the assembly level, a tail call corresponds to the following pattern of instructions:
 
 #+begin_src asm
-f: 
+f:
   ...
   call other
   ret
@@ -178,7 +207,7 @@ f_caller:
 
 f:            ; mark 1
   ...
-  call other 
+  call other
   ret         ; mark 3
 ...
 other:        ; mark 2
@@ -199,7 +228,7 @@ The =call other= instruction is equivalent to the pair of pseudoinstructions:
 
 #+begin_src asm
 push rip    ; rip is the program counter register
-jmp other 
+jmp other
 #+end_src
 
 If we do not need to push return address to =f=, then we can just substitute this instruction for =jmp= and get rid of one =ret=:
@@ -215,7 +244,7 @@ f_caller:
 
 f:
   ...
-  jmp other 
+  jmp other
 ...
 other:
    ...
@@ -228,16 +257,16 @@ The subroutine =other= becomes essentially the continuation of the subroutine =f
 Coming back to our example, we can rewrite it like that:
 
 #+begin_src asm
-print_char: 
+print_char:
    ...
    ret
 
-print_newline: 
-    mov rdi, 0xA          ; code 
+print_newline:
+    mov rdi, 0xA          ; code
     jmp print_char
 #+end_src
 
-** Tail recursion 
+** Tail recursion
 
 What if =other= and =f= are the same function?
 Then the =jmp= is performed to the start of =f= making the whole thing into a loop:
@@ -265,31 +294,31 @@ This is what we mean when we say that the compiler optimizes tail recursion into
 Our current example is the implementation of =print_newline= in two instructions:
 
 #+begin_src asm
-print_char: 
+print_char:
    ...
    ret
 
-print_newline: 
-    mov rdi, 0xA          ; code 
+print_newline:
+    mov rdi, 0xA          ; code
     jmp print_char
 #+end_src
 
-When the example is written like this it is easy to guess the next step. 
-If the execution is sequential why bother with a jump here? 
+When the example is written like this it is easy to guess the next step.
+If the execution is sequential why bother with a jump here?
 The control routinely falls from one instruction to the next one anyway.
 
 
 #+begin_src asm
-print_newline: 
-    mov rdi, 0xA          ; code 
-print_char: 
+print_newline:
+    mov rdi, 0xA          ; code
+print_char:
    ...
    ret
 #+end_src
 
-The subroutines have merged together here and it does not look like there are
+The subroutines have merged here, and it does not look like there are
 two separate functions anymore.
-We got a subroutine with **two entry points** labeled =print_newline= and =print_char=. 
+We got a subroutine with **two entry points** labeled =print_newline= and =print_char=.
 We call such a thing a *coroutine*.
 
 Coroutines are a generalization of subroutines, they may have a state and
@@ -303,7 +332,7 @@ If your language supports continuations, you can implement coroutines easily.
 
 * Conclusion
 
-I do like to draw connections between seemingly distant notions and areas. 
+I do like to draw connections between seemingly distant notions and areas.
 I also enjoy learning new points of view on things I already know.
 My students inspired me to write this post because for a lot of them, coming
 from higher level languages, the functions were entities with well shaped
@@ -315,6 +344,3 @@ where everything is blended together, reordered, precomputed, optimized until
 only the actual actions and their order suggest how the original program looked
 like. I think this is especially useful when reasoning about parallel programs
 and lock-free algorithms.
-
-
-

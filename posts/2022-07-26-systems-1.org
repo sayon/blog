@@ -1,0 +1,309 @@
+#+setupfile: setup.org
+#+title: Programming languages and computer systems (1)
+ #+date: <2022-07-26 Tue>
+#+excerpt: A first post in a series about computer systems, their design and the role of programming languages.
+
+A couple years ago I have started to write my second book, whose main point is
+to teach students elements of computer system design, largely speaking.
+Besides discussing the notion of systems, complexity and approaches to managing
+systems' complexity in a meaningful way, I want to give special attention to the
+programming languages. Source code transformed into a running program is an
+important part of system, the language design and the software design affect the
+resulting system in a lot of ways.
+
+The book remains largely unfinished, but as a mean to push myself to complete it
+and to share the first versions of the chapters I will post them here.
+
+The first chapters introduce the notions of systems and computer systems.
+Software and hardware engineers can greatly benefit from studying systems: 
+system design techniques can be applied to designing all kinds of software,
+hardware, hybrid systems, distributed systems, and even applied to developer
+teams, which are systems themselves.
+However, we are not focusing on the systems theory itself, and many ideas can be
+expanded or made more precise.
+
+* Systems around us
+
+In our lives we encounter multiple collections of objects that we call systems.
+/System/ is a collection of components interacting with each other and outside
+world, giving the system additional properties, that individual components do
+not possess.
+Such properties are called /systemic/ or /emergent/. 
+
+This drawing shows a system of three components, denoted A, B, and C.
+Component B interacts with A and C, while A and C do not interact directly with each other.
+A big circle is separating the system from the outside world.
+
+#+caption: A system of three components: A, B, and C.
+#+attr_latex: :width 0.3\textwidth
+#+attr_html: :width 50%
+[[../img/system.svg]]
+
+     
+The world around us is filled with systems. Here are some examples:
+
+1) Cars can transport passengers and objects.
+   This ability is a systemic property of cars.
+   No part of a car can transport objects like a whole functioning car.
+
+   Moreover, when the car is assembled but not running, it stays still.
+   Only the interaction between the parts of a car allows it to be a transport.
+
+2) Living humans are systems. Unlike in a corpse, our cells are interacting.
+   Our ability to walk, think, breathe, being alive and conscious is our
+   systemic property.
+
+3) Computers will not perform any work unless powered up and turned on.
+   The ability to compute is their systemic property.
+   It is born from interactions of software and CPU, memory, storage, buses, and other hardware components.
+
+4) A team of software, or hardware developers is unable to produce a complex
+   piece of software unless all participants interact with each other, making
+   sure that they are on the same page.
+   The ability to produce an output together through solo work and interactions
+   is a systemic property.
+
+In this part we will continuously revisit these three examples: cars, humans,
+computers, and teams.
+
+There is a saying: "a system is more than a sum of its parts."
+Indeed, a system is not only a sum of its parts, but also of interactions between them.
+Disregarding the interactions takes the emergent properties out of the picture.
+   
+Systems emerge in many areas of our lives, e.g., sociology, biology, physics,
+economics, computer science, and engineering.
+Systems theory has become an interdisciplinary field studying systems models at
+a high level of abstraction, disregarding specific domains.
+
+* Environment
+
+Systems do not exist in the void, they are interacting with the world.
+      
+1) Cars interact with the driver and the road, the trees around them, other cars.
+2) Humans interact with other humans, sounds, visuals, the air we breathe, and the food we consume.
+3) Computers interact with other devices, with humans through screens, keyboards, and other interfaces.
+
+/Environment/ is a collection of objects outside the system with which the system engages in meaningful interactions.   
+
+#+attr_latex: :width 0.3\textwidth
+#+attr_html: :width 
+#+caption: In the same system, B is an interface, and E,F,G are parts of the system environment.
+[[../img/system-environment.svg]]
+
+The context of our analysis dictates which objects should be part of the environment.
+The car might, in some cases, interact with blue whales, sound waves, bacteria,
+or asteroids, but most analyses can safely ignore them.
+If the system interacts with an object from an outside world, we include this
+object in the environment.
+The interaction should be essential for our analysis.
+       
+The environment usually includes an organized part and a chaotic part.
+Sometimes it may be viewed as a system on its own, consisting of multiple systems and interactions between them.
+If we design our own system, we often want to protect it from interacting with the chaotic part and set up the correct interactions with the organized part.
+
+Usually only a handful of the system's components are interacting with the environment directly, and we call them the /interface of the system/.
+Here are some examples:
+
+1) The interface of cars includes its controls and wheels.
+2) The interface of humans includes their eyes, ears, and skin.
+3) The interface of computers includes external devices, e.g. keyboard, screens, mice, network adapters.
+
+In other words, /interface/ consists of such components that can be viewed both as parts of the system, or of its environment.
+       
+The interface can vary depending on the system's function: if we consider a verbal conversation between two humans, their interface is a spoken word; however, when these humans dance together, the interfacing happens through visual contact and touch.
+
+An interface is like a border between the system and its environment.
+The border consists of such parts of the system that can be attributed to either the system itself or its environment.
+It is not always easy to define the border well, it may be blurred.
+
+* Computer systems
+
+In computer systems, we peek through the interface of a computer system and observe the processes inside.
+Then we /interpret/ our observations, and this interpretation is what constitutes /computations/.
+
+
+** Examples of computer systems in nature
+
+To demonstrate the importance of our interpretation, let us study some systems where computations happen in unorthodox ways.
+
+1) Computers are deterministic, so they do not have components to generate random numbers.
+   Unless they incorporate a specific hardware component to generate randomness, they cannot achieve true non-determinism.
+   Computers can imitate randomness through clever mathematical trickery, but such numbers, although they /seem/ random, are predictable.
+   However, actual random numbers have numerous uses, especially in cryptography.
+
+   One good way of generating actual random numbers is an online service located at =www.random.org=.
+   It uses electromagnetic noise from the atmosphere of Earth as a seed for the random number generator.
+   Using such numbers for cryptography is much more adequate than pseudo-random numbers generated by a traditional computer.
+
+   We can say that the part of =random.org= that performs computations is the atmosphere of Earth itself.
+   It may seem strange because computation results come from observing nature, not through computations on a human-made computer.
+   However, observing atmospheric noise and interpreting our observations, then plugging it into a more conventional computer system, provides us with numbers with very particular properties.
+   What is it, if not a computing process?
+
+2) Another example is /pulsars/.
+   Pulsars are stars at the late stages of their life, emitting bursts of light with high and very stable frequency.
+   Therefore, they can be used as a clock: we count the bursts and know how many milliseconds have passed.
+   Counting time is also computation.
+
+3) The third example is ant colonies.
+   Ants are searching for food in a process that can be described as a random walk. As they move, they mark their steps with a scent of pheromones.
+
+   When an ant worker reaches food or another resource, it goes back to the ant colony, tracing back its steps.
+   Thanks to the smelly footprints, it can go back following precisely the same route from the ant colony to food.
+
+   However, its initial path can be far from optimal.
+   For example, the ant may walk a full circle, so its patch will contain loops.
+   Alternatively, it can go uphill instead of going around the hill.
+
+   Nature seeks efficiency, and ants use their capacities to recognize stronger and weaker smells to optimize their paths.
+   The smell gradually evaporates, so the path to the ant colony has a weaker smell.
+   Similarly, the path to the food was taken more recently and thus has a stronger smell.
+   Turns out, this information is sufficient to shorten paths substantially.
+
+   So, if we put a piece of food in the proximity of an ant colony, we will find an optimal path from this colony to food.
+   All of it --- by observing ants, without any circuitry.
+   This is a kind of computation that does not look different from something computed on your laptop.
+   Actually, ant colonies have inspired some path search algorithms.
+
+#+begin_comment
+Reference?
+#+end_comment
+
+To sum it up, computations can be performed in a lot of ways, and interpretation plays a huge role in it.
+Sometimes nature performs computations without computers, and we interpret natural processes as computations.
+
+** Programs as systems
+
+Writing programs is of particular interest to us.
+What is the relationship between programming and computer systems?
+
+When we program, the outcome of our work is the /source code of a program/.
+It may be executed through interpretation, it may be compiled and then executed in a different form.
+
+Systems are alive, their parts are interacting, and new properties emerge from these interactions.
+
+The source code is dead.
+It is akin to a manual on how to assemble a piece of furniture, and someone or something else has to do the actual work.
+    
+However, a running program becomes a part of a hybrid hardware-software computer system.
+It is impossible to understand its behaviour without thinking about hardware, software, and their interaction.
+By reducing the system to just software or hardware we lose the other part from the sight, and we also lose their interactions.
+
+#+begin_comment
+TODO Expand and example
+#+end_comment
+
+    
+The source code relates to the running program as a manual on how to assemble a piece of furniture relates to a system of furniture assembler, instruction manual, and furniture parts.
+This system is performing work on assembling the furniture.
+
+The blueprint of an airplane is also like the program source code.
+If we load the program in memory and prepare for its execution, it will be an actual plane standing on the ground.
+A running program will be a flying airplane.
+
+# <
+#+ATTR_HTML: :border 0 :frame none :rules none
+| Source code               | Program                     |
+|----------------------+-----------------------------|
+| airplane blueprint        | flying airplane             |
+| furniture assembly manual | working furniture assembler |
+# >  
+
+* Functional and structural decomposition
+
+The system of interest may be very complex.
+It may be difficult to /decompose/, i.e., identify its parts. 
+There are several distinct ways of doing it.
+
+** Structural parts
+
+The first way is to decompose the system /structurally/.
+It is useful for the systems assembled from isolated parts, like a car or a house.
+
+1) Wheels, chairs, gearbox are all parts of a car.
+2) Bones, muscles, internal organs are parts of a human.
+3) Processor, motherboard, memory chips are parts of a computer.
+
+      
+The second, more useful way, is to decompose the system /functionally/.
+Each part is identified by its role: what is its function in a system?
+This is not the same as structurally decomposing system, because we only care about the functionality.
+
+** Functional components
+
+One structural part may participate in multiple interactions and play different roles.
+
+1) Steering wheel, knobs, car computer, gear box, steering wheel booster and other parts of a car assist its driver in controlling the car; it is their function.
+   Some of these parts have also other functions, like the car computer, which may regulate the fuel consumption.
+   So, the car can be functionally decomposed in multiple parts, two of which are:
+
+   - A part to assist the driver.
+   - A part to regulate the fuel consumption.
+
+   It is impossible to isolate these two parts one from another; therefore it is not a structural decomposition.
+
+2) Bones are structural parts of humans, but their roles are many: they support us, they protect bone marrow, they allow an effective functioning of muscles and tendants.
+
+3) A hard disk drive may be a structural part of a computer.
+   It has many roles, e.g., it is a data storage hosting partitions with filesystems; it also participates in the functioning of virtual memory, as we will see in Chapter 6.
+  
+4) Scissors is another good example of a system with different functional and structural decomposition.
+   It is able to cut paper better than a simple knife because of its systemic properties.
+   Structurally scissors are composed of two pieces of metal and a screw that connects them together. 
+   Functionally, the same scissors consist of two parts: one is used to hold them, whereas another cuts paper. Not only do scissors have more structural parts than functional, we can not map structural parts to functional parts.
+
+5) Consider a team, a system of people working on the same project.
+   Structurally, every person is a part of such system.
+   Functionally, the parts of this system are /roles/: programmers, designers, managers, testers etc.
+   One of the differences between them is that one person can play several roles (e.g. be a programmer and project manager, or programmer and graphics designer).
+
+** Functional view of systems
+
+Functional way of viewing systems is considered more efficient for engineering
+computer systems, including programs.
+It emphasizes the important aspect of systems --- their functionality.
+Then this functionality may be implemented in software, in hardware, or in a hybrid form.
+Later we will study an example of virtual memory; it is a mechanism implemented
+by an operating system that leverages certain hardware features. Virtual memory
+is not exclusively hardware or software.
+
+
+Imagine we are building a system that requires intensive computations, like ray tracing in computer games.
+Its evolution may look like this:
+
+1) The starting point is a simple single-threaded algorithm to perform ray tracing on a single CPU.
+   To speed it up, we provide the fastest CPU available.
+2) The algorithm is optimized on multiple levels to work as fast as possible.
+3) The algorithm is parallelized so that ray tracing is performed in multiple threads.
+4) The computations are moved to a dedicated graphics card. This requires redesigning the algorithm.
+   The graphics card is often a good computation unit to run highly parallelized algorithms.
+5) If a graphics card is not efficient enough, or if it draws too much power, we may design our own chip.
+   So the whole algorithm will be encoded as a circuit on a FGPA (field-programmable gate array) which will allow to maximize its speed and minimize the energy consumption.
+
+At all these stages of life, the functional decomposition of the system was the same, but its structural decomposition has changed considerably.
+It is therefore more effective to think about functionality and roles of system parts, than to limit yourself with the fixed implementation straight away.
+The implementation should follow the functionality and various requirements, not the other way around.
+
+** Examples from computer systems
+
+To get accustomed to structural and functional decompositions we will study examples from computer systems and programming.
+
+1) The first example is a /cursor/; we all see it constantly on computer screen as we point at things, drag them or otherwise interact with them.
+   Cursor is a functional component, not a structural one.
+   It is not equivalent to mouse, graphical tablet or any other device, because a program can take control over the cursor and move it around.
+
+2) A lot of programs are being executed simultaneously on your computer.
+   They coexist and are isolated from one another through /virtual memory/.
+   The function of virtual memory is to store data.
+   The virtual memory space itself consists of areas of forbidden addresses, files, mapped from hard drive, anonymous pages and so on.
+   The virtual memory is backed by the physical memory, storage (in case of memory swapping or mapping files) and operating system, which ensures transparent operation with it.
+
+   It does not seem possible to divide computer system into structural parts in a way that isolates one virtual memory space from all others, so it is not a structural component.
+   Another example is a process --- we have all seen a list of processes in a task manager. A similar argument is applicable to it: we can not divide computer on parts structurally to isolate one process. A process contains a virtual address space too, parts of which are shared among processes. So a process is also a functional component.
+
+3) The final example is /storage/ --- its name alone suggests its function and hence that it is a functional component.
+   It can be implemented as a piece of hardware, but the data can be stored in a distributed filesystem, in a distributed database, in cloud.
+   In cloud storage it is not clear where a specific piece of data is stored due to factors like replication blurring it.
+
+
+Don't think twice about [[mailto:igorjirkov@gmail.com][sending me a message]] if something caught your eye :)
