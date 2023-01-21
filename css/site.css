@@ -64,11 +64,13 @@ body a:hover {
   text-decoration: underline;
 }
 body pre {
-  background: rgb(230,230,230);
+  background: #eee;
+  border: 1px solid #ccc;
+  padding: 10px;
 }
 body pre.src {
   overflow-y: auto !important;
-  font-size: 16px;
+  font-size: .9em;
 }
 body code {
   background: #eee;

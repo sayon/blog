@@ -5,26 +5,27 @@
   #+filetags: :education:self-improvement:reading:
 
 
-  There is a (toxic) productivity hype on YouTube.
-  Everyone is making a video about it, explaining, how to achieve all great things in 24 hours.
-  Apparently, it is mandatory to use Obsidian or Notion, waking up at 4AM, thanking every object in the room, going for a
-  jog and only then starting your work day.
-  I do not think that I am particularly productive, but I am certainly more
-  productive then /some/, so for them and for the curious I am writing this post.
+  I love being efficient and there is nothing like a feeling of wholesomeness at the end of the
+  day when you realize that you have not wasted it.
+  I am not incredibly productive, but I am more productive then /some/ people,
+  including myself for practically my whole previous life.
 
-* Structure
-I have spent several years in trying to perfect a system that could work for me.
-While it is not ideal and does not work as good as I want, it /actually works for
-months now/, which is a great progress for me.
-It has also brought more order into my life, eliminated friction and helped systematize
-all my intellectual activities.
+  I attribute my recent increase of productivity to my knowledge acquisition
+  system.
+  It is not a perfect system indeed, and always a work-in-progress, but it stuck
+  with me for months now, which is a good sign.
+  Additionally, it has ordered my life, eliminated much friction and helped systematize
+  all my intellectual activities.
+  Maybe this post will inspire you to create a similar system, or improve yours.
+
+* Overview
 
 The main components of my system are:
 
 1) Zettelkasten, stored in a git repository and organized in Emacs with =org-mode= and =org-roam=.
 2) Book storage: cloud storage with digital articles and books, and a bookshelf
    with physical books.
-3) Galaxy Tab7 FE, an Android tablet with a stylus to keep a working set of
+3) An Android tablet with a stylus to keep a working set of
    documents and annotate them.
 4) An e-ink reader, which mirrors a part of my collection of books.
 
@@ -51,9 +52,9 @@ the section headers, sometimes section introductions.
 It is enjoyable doing this with a physical book!
 
 Often, the book is either not entirely new for me, or only some chapters are
-useful ---  it is necessary to identify them before you actually read the book.
-This stage is even more important if the book is not an easy reading: sometimes,
-getting through every single page may require an extensive research and exhausting
+useful ---  it is necessary to identify them before reading.
+This is most important if the book is not an easy reading: sometimes,
+getting through every single page may require an extensive research and an exhausting
 thinking.
 
 My goals at this stage are:
@@ -74,28 +75,31 @@ ideas through a series of increasingly detailed approximations.
 
 Once I have a general idea of what to expect from the book, I start reading and
 annotating it.
-As a kid, I was reading really fast and with extremely poor retention, so now if I am
+As a kid, I was reading fast but memorized little, so now if I am
 serious about working through the text, I am annotating it.
-I use a set of four pencils: violet, blue, red, and green, and four highlighters of the same colors.
+I use a set of four pencils and four highlighters of colors: violet, blue, red, and green.
 When something picks my interest, I highlight a fragment of text with one of
 these colors and write text on margins in the same color. This way a commentary
 is matched to a fragment.
 
-There is a logic to color coding:
+#+attr_org: :width 80%
+[[../img/book-annotated.jpeg]]
+
+There is a logic to my color selection:
 
 + *Violet* is for summarizing. It is well visible on paper and also
   distinguishable from black, so it does not fuse with the text.
 
-  It is *not useful* to highlight without commenting. For me, writing summary is
-  a useful part, and highlighting is optional [fn:1].
+  It is *not useful* to highlight without commenting. Writing summary is
+  mandatory, highlighting is optional [fn:1].
 
 + *Blue* is for connections. It reminds me of hyperlinks on Web pages.
   With blue I mark reasonable connections to other topics, writers, or books.
   Connections greatly enhance retention.
 
 + *Red* is for questions and critique. It attracts the most attention and is
-  associated with danger. I use it if I do not agree with something written, or
-  if I do not understand it.
+  associated with danger. I use it if I do not agree with the author, or
+  if I do not understand a fragment.
 
 + *Green* is for everything else. It is a safe, a bit disconnected color. If my
   curiosity suggests me a possible connection to my previous readings, if I get
@@ -104,33 +108,29 @@ There is a logic to color coding:
 
 I am never waiting to finish one book before starting another, so my working set
 of sources is usually large.
-It helps establishing more connections; sometimes, it also enhances
-understanding, since I am exposed to several explanations of the same concepts,
-often from different points of view.
-
-[[../img/book-annotated.jpeg]]
+Reading many books on the same topic helps establishing more connections.
+Sometimes, it also enhances understanding, since I am exposed to several
+explanations of the same concepts, often from different points of view.
 
 Every now and then I revise the notes to add information to my permanent note storage.
 
 ** Storing notes
 
 The core of my system is Zettelkasten.
-In short, it is a personal Wiki with small subjective articles
-and annotated subjective connections between them.
-Each "wiki article" is a note on something: a concept, an idea, a book, an article
-etc.
-After some reading, it is time to revise my notes, skimming through
-the book again, and put bits of notes to the appropriate articles.
+It is a personal Wiki with small subjective articles and annotated subjective connections between them.
+Each "wiki article" is a note on something: a concept, an idea, a book, an article etc.
+After some reading, it is time to revise my notes, skim through the book again,
+and put the bits of notes into the appropriate notes in Zettelkasten.
 
-For me, there are advantages of taking notes in two stages:
+I like taking notes in two stages:
 
-- It forces me to come back to notes in a systemic way; I quickly re-read,
-  discover things that I miss and memorize information again.
-- It combines the advantages of hand-writing (good for retention, sheets are more "personal", stimulates thinking) and digital note-taking
-  (speed, ease of searching, version control, digital illustrations, etc).
-
-Subjectively, I have noticed that I remember more since I have started doing two
-stages, as opposed to just writing digital textual notes right away.
+- It forces me to come back to notes in a systemic way.
+  I re-read, re-discover things that I missed, and memorize information better.
+- It combines the advantages of hand-writing and digital note-taking.
+  + Handwriting is good for retention; sheets are more "personal", it stimulates
+    thinking.
+  + Digital note-taking is fast, notes are easier to systematize, much easier to
+    edit and illustrate, they can benefit from the version control systems etc.
 
 
 I use =emacs= with =org-roam= to keep my Zettelkasten organized, easily search through them and
@@ -139,6 +139,7 @@ explore them with =org-roam-ui=.
 
 Here is an example of a note:
 
+#+attr_org: :width 80%
 [[../img/emacs-zettel-example.png]]
 
 ... and its source code:
@@ -211,8 +212,7 @@ I keep most metadata out of the way by putting it in the end of the note.
 
 * What about digital sources?
 
-I am doing a lot of reading on my tablet as well, because I have most books and
-articles only in digital format.
+Most of my books or articles are in digital format, so I read a lot on my tablet as well.
 For that, I have bought Samsung Galaxy Tab7 Fan Edition this summer, and it is
 just really good for me:
 
@@ -222,32 +222,34 @@ just really good for me:
   closer to the fountain pen, which is my writing tool of preference on paper.
 - The performance is adequate for everything I need.
 
- [[../img/pen-of-choice.jpeg]]
 
+  #+attr_org: :width 80%
  [[../img/tablet-book.jpeg]]
 
 
 
 As for software, I found that Flexcil works best for me.
-It does not choke when I am keeping 40 tabs with documents open, is responsive
-and easily handles even huge books like
-[[http://www.topology.org/tex/conc/dg.html][Differential geometry reconstructed]], which has around 2500 pages as of today.
+It does not choke when I open 40 tabs with documents, stays responsive
+and handles even huge books like [[http://www.topology.org/tex/conc/dg.html][Differential geometry reconstructed]], which has around 2500 pages as of today.
 
 The editing capabilities are not great, e.g. you can not rotate your handwritten
 text, and the Android version lacks a good synchronization mechanism -- you
 basically have to do backups and restore them.
-The backup process is fast, so I am doing it most of the days.
-Once these things get fixed, it will become an ideal tool for me.
+The backup process is fast thought, so I am just doing backing up my notes in
+cloud every day.
+Once these features get implemented, Flexcil will become an ideal tool for me.
 
-For the pleasure reading, when I am not annotating, I prefer using my
-old e-ink reader PocketBook 902, which has a reasonably big screen.
+I also read for pleasure, without annotating.
+For that I still prefer using my old e-ink reader PocketBook 902
+E-ink displays are easier on my eyes.
 It has now turned 12 years old, and still works like a charm.
 
+#+attr_org: :width 80%
 [[../img/bookreader.jpeg]]
 
-I was considering buying an e-ink tablet for annotating, but I find that having
-color on annotation is too great. The current color e-ink tablets were not
-convincing to me for various reasons.
+At some point I was considering buying an e-ink tablet for annotating, but I find that having
+color on annotations is too valuable.
+The current e-ink tablets were not convincing to me.
 
 
 * Pitfalls
@@ -258,28 +260,35 @@ convincing to me for various reasons.
 - I did not perceive this system as too complicated, until I have written this
   post. Start small, build a habit, grow as you see fit.
 
-- Without habit, Zettelkasten will stay empty. You may need to force yourself to
-  stop reading at some point, revise your notes and put them to the permanent
+- Without a habit, your Zettelkasten will stay empty.
+  You may need to force yourself to stop reading at some point, revise your notes and put them to the permanent
   database.
-  Do not delay until you forget the source and recalling the information will be
-  difficult.
+  Do not delay this too much, or you will not be recalling the annotated texts,
+  but rather reading them anew.
 
 - Redundancy is good. You will naturally put the same information in many notes,
   and *it is all right*.
 
 - Drawing is great. Emacs and org notes support =.svg= files, but you can also include
   photos or screenshots of your hand-drawn diagrams, why not.
-- Think carefully which software you will be using (if any).
-  It is great to have
-  the second brain for life.
-  My first digital notes were in some note-taking app for Symbian
-  OS, then in Evernote.
-  These programs are proprietary and do not always have an easy way for you to migrate your notes somewhere else.
-  Emacs (and text files) is clearly not everyone's darling, but it has been around for more, than
-  I am alive, so I am quite certain that:
-  - either I will be able to keep my notes there for life,
-  - or I will be able to migrate them somewhere should such need arise.
 
+- Think carefully which software you will be using, if any.
+  It is great to have the second brain for life.
+  My first digital notes were in some note-taking app for Symbian OS, then in Evernote.
+  These programs are proprietary and do not always have an easy way for you to migrate your notes somewhere else.
+  Emacs (and text files) is clearly not everyone's darling, but it is free,
+  open-source, and has been around for more, than
+  I am alive.
+  It means that it is flexible enough to adapt to the new technological context:
+  we are not using the same computers with the same operating systems as in 80s
+  anymore, and emacs runs fine on basically everything.
+  I am quite certain that:
+  - either I will be able to keep my notes there for life,
+  - or I will be able to migrate them somewhere, should such need arise.
+
+  #+attr_org: :width 80%
+  #+caption: My favorite pen since my teen years is Sheaffer Fashion.
+ [[../img/pen-of-choice.jpeg]]
 
 #+begin_export html
 <div id="disqus_thread"></div>

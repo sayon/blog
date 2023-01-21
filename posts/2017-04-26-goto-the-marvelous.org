@@ -4,23 +4,24 @@
 #+excerpt: Using <code>goto</code> is marginalized in programmers community which likes the simple one-line recipes for the complex challenges of writing code. In some situations, however, using <code>goto</code> is the best tool in your box, and I will show you why.
 #+filetags: :education:programming:goto:c:
 
-IT folks are prone to prejudices, as we all are.  Once a beginner programmer
+IT folks are prone to prejudices, as we all are.
+Once a beginner programmer
 starts exploring the world of coding, he quickly learns catchy memes from the
 more experienced part of the community. One can then easily live by them
-without putting much thought in their meaning. 
+without putting much thought in their meaning.
 
 In general, this is also how human society works: we adopt elements
 of our parents' lifestyle and their world view, we make them parts of ourselves,
 usually not questioning the reasons for this specific behavior. However, there
 is one fundamental empirical rule: there are no silver bullets -- rules,
-that are always applicable. 
+that are always applicable.
 
 Thus, each of programming memes requires a certain context to be fully
 understood. My opinion is that we should always try to reach these deep
 foundations in order to understand when the rule can be thrown away for good.
 This post is about an absurd meme "=goto= is bad". We want to explore what
 exactly prevents =goto= from being used well in some contexts and when its use
-is quite reasonable. 
+is quite reasonable.
 
 * Why goto is stigmatized in the structured programming
 
@@ -36,7 +37,7 @@ of it.  A large slice of modern programming is structured imperative
 programming or its variations; moreover, it is what kids are taught in school.
 Because of that educational system flaw, most of us are deeply infected with an
 imperative thinking and are often emulating other paradigms on top of it in our
-heads. 
+heads.
 
 Dijkstra considered =goto= harmful because it makes harder to follow the code
 logic. This is usually true, but needs a clarification. What makes =goto=
@@ -44,7 +45,7 @@ harmful is that it is usually paired with /assignments/.
 
 Assignments are changing the abstract machine state. When reasoning about a
 typical program, we are usually tracing its execution and mark how the values
-of the variables are changing. Throwing =goto=’s everywhere makes it notably
+of the variables are changing. Throwing =goto= ’s everywhere makes it notably
 harder to follow the program state, because you can jump anywhere, from
 anywhere. That makes the trace much harder to untangle.
 
@@ -56,7 +57,7 @@ current position in code!
 
 * Finite State Machines
 
-If we want to implement a [[https://en.wikipedia.org/wiki/Finite-state_machine][Finite State Machine (FSM)]], then =goto=’s are
+If we want to implement a [[https://en.wikipedia.org/wiki/Finite-state_machine][Finite State Machine (FSM)]], then =goto= ’s are
 the way to go! Such an abstract machine consists of:
 
 - a set of states (C labels). One state is marked as an /initial state/.
@@ -65,7 +66,7 @@ the way to go! Such an abstract machine consists of:
 - for each state, a set of rules to jump to other states based on the current input.
 
 We start in the initial state and perform jumps between states based on the
-current input value. As you see, this machine has no memory. If we are 
+current input value. As you see, this machine has no memory. If we are
 implementing them in a language such as C, its state will be characterized
 solely by the position in the code we are currently at.
 
@@ -87,7 +88,7 @@ brevity.
 #+begin_src c
   #include <stddef.h>
   #include <stdio.h>
- 
+
   /* str should only contain 0 and 1 */
   int even_ones( char const* str ) {
     size_t i = 0;
@@ -95,27 +96,27 @@ brevity.
    _even:
     input = str[i++];
     if (input == '1') goto _odd;
-    if (input == '0') goto _even; 
+    if (input == '0') goto _even;
     /* end of string -- null terminator */
-    return 1; 
+    return 1;
    _odd:
     input = str[i++];
     if (input == '1') goto _even;
     if (input == '0') goto _odd;
     /* end of string -- null terminator */
-    return 0; 
+    return 0;
   }
- 
+
   void test( const char* str ) {
     printf("%s\n", even_ones( str ) ? "yes" : "no" );
   }
- 
+
   int main(void) {
     test("0101011");
     test("");
     test("010");
     test("110");
- 
+
     return 0;
   }
 #+end_src
@@ -124,7 +125,7 @@ brevity.
 An additional benefit is that there exist a quite powerful verification
 technique called /model checking/ which allows you to reason about the program
 properties if the said program is encoded as a finite state machine. You can
-reason about them using temporal logic, checking properties such as "If 
+reason about them using temporal logic, checking properties such as "If
 I got into the state A, I will never reach the state B from there".
 The model checkers can often generate C program automatically from a FSM
 description.
@@ -154,9 +155,9 @@ which free all associated resources.
     C myC;
 
     if (! myA.init() ) return 0;
-    if (! myB.init() ) return 0; // myA's destructor is called 
-    if (! myC.init() ) return 0; // myA and myB's destructors are called 
-    
+    if (! myB.init() ) return 0; // myA's destructor is called
+    if (! myC.init() ) return 0; // myA and myB's destructors are called
+
     //...
 
     // Destructors for myA, myB, myC will be called here anyway
@@ -167,7 +168,7 @@ which free all associated resources.
 In C we often want to do the same thing, but we do not have that luxury of
 automatically calling anything. It is, however, very important do to because
 some structures have dynamically allocated fields or are associated with other
-resources such as file descriptors. It can easily leak resources. So, to 
+resources such as file descriptors. It can easily leak resources. So, to
 do things right, we have to produce quite a mess:
 
 #+begin_src c
@@ -180,7 +181,7 @@ do things right, we have to produce quite a mess:
     if ( ! sb_init( &b ) ) { sa_deinit( &a ); return 0; }
     if ( ! sc_init( &c ) ) { sb_deinit( &b ); sa_deinit( &a ); return 0; }
 
-    
+
     return 1;
   }
 #+end_src
@@ -216,7 +217,7 @@ to refactor the example above to look like this:
     return 1;
 
    fail_c:
-    sb_deinit( &b ); 
+    sb_deinit( &b );
    fail_b:
     sa_deinit( &a );
    fail:
@@ -225,12 +226,12 @@ to refactor the example above to look like this:
 #+end_src
 
 Isn't it way nicer that what we have seen before? Additionally, no assignments
-are performed hence no fuss about =goto= evilness at all. 
+are performed hence no fuss about =goto= evilness at all.
 
 
 * Computed goto
 
-Computed =goto=s are a non-standard feature supported by many popular C and C++
+Computed =goto=  is a non-standard feature supported by many popular C and C++
 compilers. Basically, it allows to store a label into a variable and perform
 jumps to it. It differs from calling function by pointer because no return is
 ever performed. The simplest case is shown below:
@@ -245,7 +246,7 @@ ever performed. The simplest case is shown below:
     puts("Did not jump");
     return 0;
 
-   label: 
+   label:
     puts("Did jump");
     return 1;
   }
@@ -253,16 +254,15 @@ ever performed. The simplest case is shown below:
 
 We are taking raw label address using an unusual double ampersand syntax and
 then perform a =goto=. Notice the additional asterisk before =goto=
-operand. When launched, this program will output =Did jump=. 
+operand. When launched, this program will output =Did jump=.
 
 Where can we use such a feature? Expressivity wise, it is not very interesting.
 However, sometimes we can get a speedup. A case that comes to my mind is a
 bytecode interpreter (but I have written hell of a ton of them, so I should be
 quite biased towards them). The instruction fetching takes typically no less
-than 30% of the execution time, and computed =goto=s allow one to speed up
-exactly this part of program execution. 
+than 30% of the execution time, and computed =goto= allows one to speed it up.
 
-Without computed =goto=s:
+Without computed =goto=:
 
 #+begin_src c
   #include <stdio.h>
@@ -278,7 +278,7 @@ Without computed =goto=s:
 
     for (;;)
       switch ( *instr )  {
-      case BC_PUSH: 
+      case BC_PUSH:
         instr++;
         sp++;
         ,*sp = *instr;
@@ -290,14 +290,14 @@ Without computed =goto=s:
         instr++;
         break;
 
-      case BC_ADD: 
+      case BC_ADD:
         sp--;
         sp[0] += sp[1];
         instr++;
         break;
 
       case BC_HALT:
-        return; 
+        return;
       }
   }
 
@@ -338,14 +338,14 @@ void interpreter( uint8_t* instr ) {
   instr++;
   goto *labels[*instr];
 
-  label_ADD: 
+  label_ADD:
   sp--;
   sp[0] += sp[1];
   instr++;
   goto *labels[*instr];
 
   label_HALT:
-  return; 
+  return;
 }
 
 int main() {
@@ -376,10 +376,10 @@ so that =switch= is predicted better, so the performance gain from using
 computed =goto= is not that substantial.
 
 P.S. If you really want to make a faster interpreter, consider implementing
-indirect threaded code, direct threaded code or write a JIT compiler. 
+indirect threaded code, direct threaded code or write a JIT compiler.
 Computed =goto= is not a magical thing to make your interpreter as fast as
 possible.
 
-* Footnotes:
+* Footnotes
 
 [fn:1] C99 standard, Section 6.8.4.2.
