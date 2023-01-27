@@ -210,6 +210,14 @@ to just merge both into "Related".
 
 I keep most metadata out of the way by putting it in the end of the note.
 
+Additionally, emacs lets us explore the connected graph of notes in 3D, filter
+them by tags, preview them nicely etc. thanks to =org-roam-ui=. 
+It looks like this:
+
+  #+attr_org: :width 80%
+ [[../img/org-roam-ui.png]]
+
+
 * What about digital sources?
 
 Most of my books or articles are in digital format, so I read a lot on my tablet as well.
