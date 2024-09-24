@@ -1,22 +1,22 @@
 #+setupfile: setup.org
 #+title: My note-taking process
- #+date: <2023-01-19>
-  #+excerpt: A workflow of reading, annotating, and note-keeping.
-  #+filetags: :education:self-improvement:reading:
+#+date: <2023-01-19>
+#+excerpt: A workflow of reading, annotating, and note-keeping.
+#+filetags: :education:self-improvement:reading:
 
 
-  I love being efficient and there is nothing like a feeling of wholesomeness at the end of the
-  day when you realize that you have not wasted it.
-  I am not incredibly productive, but I am more productive then /some/ people,
-  including myself for practically my whole previous life.
+I love being efficient and there is nothing like a feeling of wholesomeness at the end of the
+day when you realize that you have not wasted it.
+I am not incredibly productive, but I am more productive then /some/ people,
+including myself for practically my whole previous life.
 
-  I attribute my recent increase of productivity to my knowledge acquisition
-  system.
-  It is not a perfect system indeed, and always a work-in-progress, but it stuck
-  with me for months now, which is a good sign.
-  Additionally, it has ordered my life, eliminated much friction and helped systematize
-  all my intellectual activities.
-  Maybe this post will inspire you to create a similar system, or improve yours.
+I attribute my recent increase of productivity to my knowledge acquisition
+system.
+It is not a perfect system indeed, and always a work-in-progress, but it stuck
+with me for months now, which is a good sign.
+Additionally, it has ordered my life, eliminated much friction and helped systematize
+all my intellectual activities.
+Maybe this post will inspire you to create a similar system, or improve yours.
 
 * Overview
 
@@ -214,8 +214,8 @@ Additionally, emacs lets us explore the connected graph of notes in 3D, filter
 them by tags, preview them nicely etc. thanks to =org-roam-ui=. 
 It looks like this:
 
-  #+attr_org: :width 80%
- [[../img/org-roam-ui.png]]
+#+attr_org: :width 80%
+[[../img/org-roam-ui.png]]
 
 
 * What about digital sources?
@@ -231,8 +231,8 @@ just really good for me:
 - The performance is adequate for everything I need.
 
 
-  #+attr_org: :width 80%
- [[../img/tablet-book.jpeg]]
+#+attr_org: :width 80%
+[[../img/tablet-book.jpeg]]
 
 
 
@@ -296,7 +296,7 @@ The current e-ink tablets were not convincing to me.
 
   #+attr_org: :width 80%
   #+caption: My favorite pen since my teen years is Sheaffer Fashion.
- [[../img/pen-of-choice.jpeg]]
+  [[../img/pen-of-choice.jpeg]]
 
 #+begin_export html
 <div id="disqus_thread"></div>

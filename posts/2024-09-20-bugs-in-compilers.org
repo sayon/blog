@@ -1,0 +1,250 @@
+#+setupfile: setup.org
+#+title: Compiler correctness
+#+date: <2024-09-19 Thu>
+#+excerpt: How bugs in compilers are different from bugs in more common programs?
+
+
+This post explores the notions of bug identity, bug identification applied to
+compilers. I will try to highlight why compilers are so difficult to check for
+correctness.
+
+* Context: Verification and Validation of Software
+
+** Model of a program
+
+Most programs can be modeled as a black box that reacts to events. In simple
+cases, the only event is feeding the program input data, and the only reaction
+is producing output.
+
+The choice of events and reactions for the model is contextual. We do not need
+to include every aspect of the program's execution in the model.
+
+- If only computation results matter, we may limit the model to describing
+  output files. This is prevalent in non-interactive programs; think scientific
+  computing.
+- If the execution speed, or the reaction time matters, we may include events
+  reflecting /how/ the results are obtained. This way, we can track memory
+  consumption or response delays. Think high-frequency trading or robotics.
+
+
+** What makes a program /correct/?
+
+We usually think of program correctness in a vague, informal way. A correct
+program does what we expect it to do, but what exactly do we expect?
+
+To make the notion of correctness clear for a given program, we should describe
+our understanding of its behavior. In other words, we need to make explicit the
+expected reactions to the input events. This description is called
+a *specification* and can  be written in plain English, in some formal language,
+or a mix of the two.
+
+There are usually many ways to write code that satisfies a proposed
+specification. First, there exist infinitely many programs with exactly the same
+observable behavior. Second, the specification can be quite permissive, which
+means many different behaviors are considered correct.
+
+To illustrate the permissiveness point, let's take the specification:
+
+#+begin_quote
+The program outputs all odd numbers in range from 0 to 100.
+#+end_quote
+
+This specification does not impose any order on these numbers, nor does it
+prohibit duplicates. Therefore, a program that produces one of the following
+outputs will fit this specification:
+
+- Outputs =[1,3,5,...,99]=.
+- Outputs =[1,5,3,...,99]=.
+- Outputs =[99,97, ..., 1, 3]=, or any other permutation of these elements.
+- Outputs the list =[1,3,5,...,99]= twice, and so on.
+
+*Verification* is making an argument that the program behavior matches the
+specification. This argument should be backed by reasoning, tests, and formal
+methods.
+
+Another step that justifies our belief in the software correctness is called
+*validation*. While verification checks if our understanding of what the program
+should do matches the actual program behavior, validation checks if we have the
+right idea about what it should do, i.e. if the specification makes sense.
+Validation is performed for the real use cases.
+
+The meaning of the correctness usually implies that it is both verified and
+validated. Bugs are evidence against the system correctness.
+
+
+* How are compilers different from other software?
+
+In the previous section, we provided an example of a program specification: “output
+all even numbers in the range from 0 to 100”. If a program outputs a list of numbers
+without any special properties, it is easy to verify its output -- just make sure
+it contains all the expected numbers. All outputs that contain the required numbers
+are equivalent when we think about the program correctness. This equivalence is
+easy to define, and computers can verify it.
+
+Compilers are way more complicated. To decide if a compiler is /correct/ for a
+certain input program, we need to show that the /observable behavior/ of an
+input program written in X is equivalent to the observable behavior of the
+output program, written in Y.
+
+Unlike comparing two lists of numbers, equivalence of program is not just harder
+-- it is undecidable in a general case. Imagine needing to put programs in every
+imaginable context and see how they behave -- there is no algorithm that can do
+that for all programs, in a finite time. This follows from [[https://en.wikipedia.org/wiki/Rice%27s_theorem][Rice's theorem]].
+
+How we define an observable behavior is situational. For example, if we are
+interested in how exactly the program is executed, not just its results, we
+may include the memory allocation events. Otherwise we can completely ignore all
+operational aspects of a program, reducing it to its output.
+
+[[https://compcert.org/][CompCert]], the first verified C compiler, defines an event in a C program as a
+system call or read/write to volatile memory; then an observable behavior is
+either a finite trace of events, or an infinite trace (repeating the same
+sequence of events or diverging), or an error. This approach can be traced to
+systems theory:
+
+#+begin_quote
+As we have seen, systems of equations [...] may have three different kinds of
+solution. The system in question may asymptotically attain a stable stationary
+state with increasing time; it may never attain such state; or there may be
+periodic oscillations.
+
+--- "General Systems Theory", Ludwig von Bertalanfy
+#+end_quote
+
+
+
+* Identifying bugs in compilers
+
+Let us simplify the task: instead of verifying the correctness of the compiler
+for all meaningful programs in X, let's focus on identifying specific bugs in the
+compiler. While testing it on different programs in X, we may encounter a
+program that behaves differently after compilation. This could seem like  like a
+strong  evidence for a compiler bug. *Surprisingly, this is still not sufficient
+to identify a bug in compiler.* But why?
+
+To compare the behaviors of two programs, we need to answer several complicated
+questions.
+
+1. What is a program’s behavior? This, in turn, requires defining:
+    - The language semantic for X;
+    - The language semantic for Y;
+    - Observable behavior i.e. which events are visible.
+2. Can a program in X exhibit multiple behaviors? What about compiled programs in Y?
+   - If yes, is it acceptable to lose some of X’s behaviors in the compiled programs?
+3. Can a program in X exhibit undefined behavior? Additionally:
+    - Can undefined behavior be reliably identified?
+    - Does the compiler guarantee anything about the behavior of the compiled program in such cases?
+
+These issues hint to the first major problem: *bug identification/definition*.
+Given a compiled program that behaves unexpectedly, what is the underlying cause?
+
+
+** No formal language specification
+
+Many popular languages lack a formal, unambiguous specification.
+In its absence, the compiler effectively becomes the language's de facto
+specification and a part of the ultimate source of truth for determining program
+behavior.
+
+It gets worse: compilers themselves are often written in a language that lacks a
+formal specification. For example, suppose we have a compiler written in C++.
+The compiler's behavior may then be compromised by:
+
+- The quirks of C++ semantics, which make it harder to interpret the compiler's code.
+- C++'s compile-time non-determinism means that after recompiling the new executable of X's compiler
+  may compile programs differently.
+- C++'s many undefined behaviors may carry over into programs in X, even if X is not supposed to have any.
+- Bugs of the C++ compiler itself may affect the compiler of X.
+- Implementation bugs of the C++ compiler may introduce bugs in
+  the specification of language X and creep into the programs written in X.
+
+Thus, different behaviors in a program in X and its compiled version in Y do not necessarily indicate a bug /in the compiler/.
+
+
+* Same bug or different bugs?
+
+If we are unsure whether we have found a bug or if the unexpected behavior stems from an incomplete language specification, distinguishing one bug from another becomes even more difficult. How can we tell whether two
+miscompilations result from the same compiler bug or from different ones?
+This is the *bug identity* problem.
+
+Why does bug identity matter? Can't we just fix bugs one by one?
+Sometimes, fixing one bug will inadvertently fix another, suggesting that they have a common root cause.
+
+First, if you have 100 issues in your bug tracker, it helps to know
+whether any of them are related. This aids in planning, as it helps estimate how
+many patches do we really need to resolve these 100 issues.
+
+Second, there are multiple ways to incentivize the community to report bugs for
+some sort of compensation. When two people report the same bug, how do we ensure fair compensation?
+It is hard to say whether they have reported the same bug at all!
+All reward strategies seem flawed:
+
+
+- A "first-come, first-rewarded" approach does not work because new
+  reports may be related to already reported but unresolved bugs.
+- Rewarding both reporters equally is problematic because one can spam the
+  system by generating numerous programs triggering the same bug, receiving
+  disproportionately large rewards or reducing the reward for the original
+  reporter if the total reward pool is fixed.
+
+Futhermore, compiler users are often application developers, not experts in
+programming language semantics or programming language theory. They may not
+understand why, when they report something that is /clearly a bug/ to them, the
+compiler experts scratch their heads and come up with an excuse -- obviously
+because they don't want to pay or are ignorant.
+
+Languages like C and C++ are rife of "bugs" of this kind. Many rather arcane
+behaviors are only recognized by a selected few, well versed in the language
+standard. For instance,  using unions for type punning, where one union field is
+written and
+another is read, falls into undefined behavior according to the language standard.
+
+#+begin_src c
+union array {
+        char[8] as_chars;
+        uint64_t as_uint64;
+};
+
+
+union array my_union;
+my_union.as_uint64 = 42;
+
+// accessing the 3rd byte of the variable holding 42.
+char n = my_union.as_chars[3];
+#+end_src
+
+In this case, the C standard deems such practices as undefined behavior, meaning the developer should not expect consistent behavior. Therefore if a
+developer finds that the variable =n= equals 999 in their code, regardless of
+the value written to =my_union.as_uint64=, jokes on them -- the language standard is on the compiler's side.
+
+One potential way to define bug identity is to say that two bugs are the same if one cannot reasonably be fixed without also fixing the other. This definition is imperfect, as the term "reasonably" is vague. In theory, we could patch specific cases without addressing the root cause, but this is impractical for compilers, as similar bugs will continue to arise.
+
+In the end, bug identity is hard to formalize. Calling in an expert may be the best option, relying on open criteria to judge whether two inputs trigger the same bug or different ones. Some cases are clearly not bugs, while most fall into a gray area.
+
+* Bug severity
+
+After distinguishing between two bugs, the next step is to prioritize which one to fix first. This is the *bug severity* issue.
+
+Compilers are usually tested using a code base containing both synthetic tests
+and real projects. It makes sense to use the real projects affected by the bug
+as a part of work prioritization.
+
+However, the identity problem complicates this process: decision-making requires comparing bugs across different input programs. How do we identify duplicates? How do we tell if the same bug is affecting two programs or if two different bugs are at play?
+
+As mentioned earlier, automating bug identification and comparison is not
+feasible, meaning expert judgment is necessary.  Malicious users who understand
+compiler bugs may submit thousands of inputs that trigger the bug, flooding
+developers with AI-generated bug reports. This can amount to a real-world
+denial-of-service attack on the development team. Fairly rewarding bug reports
+under these circumstances becomes nearly impossible.
+
+* Conclusion
+Most programming languages lack formal, unambiguous specifications, making it difficult to define correct program behavior and identify bugs in compilers.
+
+Comparing bugs is challenging because they stem from program behavior.
+Programs may have multiple possible behaviors and the compiler will select one
+of them. Since program equivalence is not decidable for Turing-complete
+languages, we
+can't reliably detect when the compiler's output changes but the behavior remains the same.
+
+In the next post, I will explore the challenges faced by compilers for platforms where computations are paid for with gas, particularly when the compiler has multiple backends with different gas models.

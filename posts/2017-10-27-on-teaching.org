@@ -31,11 +31,11 @@ Based on them, I think that the ideal way to teach should incorporate the follow
 
 @@html:<iframe width="560" height="315" src="https://www.youtube.com/embed/Ip3X9LOh2dk" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>@@
 
-  An animation, or, even better, an interactive playground are perfect to provide an intuition about a mathematical notion. This is because we need to connect mathematics to the sensory experiences.
+An animation, or, even better, an interactive playground are perfect to provide an intuition about a mathematical notion. This is because we need to connect mathematics to the sensory experiences.
 
 - Very few people can memorize a lot of abstract stuff and then deduce everything from it when asked to apply it in practice. Hence we need to provide examples. In my opinion, some nice explanation patterns are:
-    - Deductive and inductive: start with definitions, show examples, explain how exactly each example follows from definition
-    - Inductive and deductive: start informal, give intuition, provide examples, then give precise formal definition, show how exactly the given examples are generalized to these definitions. Then give more examples, but derive them from formal definitions.
+  - Deductive and inductive: start with definitions, show examples, explain how exactly each example follows from definition
+  - Inductive and deductive: start informal, give intuition, provide examples, then give precise formal definition, show how exactly the given examples are generalized to these definitions. Then give more examples, but derive them from formal definitions.
 
 
 
