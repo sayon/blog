@@ -13,7 +13,7 @@ The idea is simple: if types are equal, there exists a bijection between their e
 
 $$\forall A \ B: Set, A = B \rightarrow \exists f \exists g: \forall x:A \ \forall y : B, (f \ x = y -> g \ y = x )$$
 
-#+begin_src coq
+#+begin_src
 Definition id {T} := fun x : T => x.
  
 Lemma exists_bijection (A B: Set):
@@ -31,7 +31,7 @@ The proof was a piece of cake. Now to battle!
 
 You remember, that =unit= is a type inhabited by only one element =tt=?
 
-#+begin_src  coq
+#+begin_src
 Inductive unit : Set := tt : unit.
 #+end_src
 
@@ -44,7 +44,7 @@ Since both $f \ true$ and $f\ false$ are equal, we deduce $g\ tt =true$ and $g \
 
 Now the code:
 
-#+begin_src coq
+#+begin_src
 Lemma unit_neq_bool: bool = unit -> False.
 Proof.
 intro Heq.
@@ -69,7 +69,7 @@ Let us apply the same principle to prove =~ nat = bool=.
 
 We are going to use a bit of semicolons because otherwise the proof will become very repetitive. Basically where you see an exclamation mark we got 8 goals which contexts include:
 
-#+begin_src  coq
+#+begin_src
 g x = 0
 g y = 1
 g z = 2
@@ -77,7 +77,7 @@ g z = 2
 
 where =x=, =y=, =z= all range over ${ true, false}$. There will always be at least two of three boolean values equal to each other (which should follow from Dirichlet principle), which will feed us with nice contradiction to do a rewrite and inversion.
 
-#+begin_src coq
+#+begin_src
 Lemma nat_neq_bool: nat = bool -> False.
 intro Heq.
 destruct (exists_bijection _ _ Heq) as [f [g Hfg]].

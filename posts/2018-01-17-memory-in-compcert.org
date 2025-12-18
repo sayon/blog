@@ -23,7 +23,7 @@ Radix tree is a data structure to implement partial mapping from integers. It is
 
 The type is defined in CompCert in =lib.Maps.PTree=:
 
-#+begin_src coq
+#+begin_src
 Inductive tree (A : Type) : Type :=
    | Leaf : tree A 
    | Node : tree A -> option A -> tree A -> tree A
@@ -35,7 +35,7 @@ A node with no children (a leaf in terms of trees) is encoded as =Node Leaf val 
 * Positive integers in Coq
 
 Positive integers are represented through their binary encoding:
-#+begin_src coq
+#+begin_src
 Inductive positive : Set :=
       | xI : positive -> positive 
       | xO : positive -> positive  
@@ -50,7 +50,7 @@ looks like the binary representation of a number written from right to left.
 For example, an integer number 11 is represented as =1011= in binary form. The
 corresponding term in Coq will be:
 
-#+begin_src coq
+#+begin_src
 xI (xI (xO xH) )
 #+end_src
 
@@ -106,7 +106,7 @@ impossible to jump from one block into another by changing the offset value. In 
 
 Values are encoded as follows:
   
-#+begin_src coq
+#+begin_src
 Inductive val : Type :=
     Vundef  : val
   | Vint    : Int.int        -> val
@@ -120,7 +120,7 @@ Inductive val : Type :=
 
 /Memory value/ is defined as follows:
 
-#+begin_src coq
+#+begin_src
 Inductive memval : Type :=
     Undef    : memval
   | Byte     : int   -> memval
@@ -157,7 +157,7 @@ px = &x
    
    results in the following values being written into memory (assuming =x= inhabits in the block #4 and a pointer is 32 bits wide).
 
-#+begin_src coq
+#+begin_src
 (Fragment ((Vptr 4 0) Q32 0) ::
 (Fragment ((Vptr 4 0) Q32 1) ::
 (Fragment ((Vptr 4 0) Q32 2) ::
@@ -196,7 +196,7 @@ can not be unfolded into their exact definitions. For us it means that we can
 only prove our own theorems based on such properties of these transformations,
 that are already proven in CompCert.
 
-#+begin_src coq
+#+begin_src
 alloc       : mem -> Z -> Z -> mem * block
 free        : mem -> block -> Z -> Z -> option mem
 
@@ -228,7 +228,7 @@ There are lemmas that allow reasoning about =load= results involving:
 
 The following lemma allows us to get raw contents from memory and decode them using =decode_val=
 
-#+begin_src coq
+#+begin_src
 load_result:
   forall (chunk : memory_chunk) (m : mem) (b : block) (ofs : Z) (v : val),
   load chunk m b ofs = Some v ->
@@ -242,7 +242,7 @@ load_result:
 Memory is represented as a record:
 
 
-#+begin_src coq
+#+begin_src
 Record mem' : Type := mkmem
   { mem_contents : PMap.t (ZMap.t Memdata.memval);
     mem_access   : PMap.t (Z -> perm_kind -> option permission);

@@ -1,0 +1,117 @@
+#+setupfile: setup.org
+#+title: Argument from recollection in Phaedo is self-illustratory
+#+date:<2025-12-18 Thu>
+#+excerpt: The argument from recollection in Plato's "Phaedo" displays a clever writing trick, being self-illustratory, and leveraging the dialogue form to convey additional meaning.
+
+
+Plato impresses me not just with his ideas, but by his writing craftsmanship.
+In line with his definition of philosophy as a practice, a process, both content
+and form of his writing contribute to its message. What's said is important,
+but how it's said adds another layer to the meaning, sometimes illustrative,
+sometimes adding a twist of depth. In this post I'd like to share some of these
+findings in Phaedo.
+
+Phaedo is a dialogue about the immortality of the soul, capturing the final
+hours of Socrates. Within the dramatic time of the dialogue, he is convincing
+his friends Simmias and Cebes that philosophy is a "practice for dying",
+preparing us to leave our bodies and be released from its inconveniences,
+enabling us to finally see things for what they are, clearly.  So, the soul is
+immortal, death is not to be feared, but welcomed when it comes (not sooner
+though, later Socrates adds that gods should decide when our time is over).
+
+Socrates gives three arguments for the immortality of the soul, here I'd like to
+focus on the argument from recollection, as it has a fascinating quality of
+illustrating itself on three levels. To reveal how exactly, let's start by
+recollecting the argument itself.
+
+Suppose you are looking at two stones, and they seem so similar to you that you
+are inclined to judge them as two equal stones.  However, in other context, from
+another angle, you might judge them unequal.  Maybe they have equal weight, but
+differ by size, or shape, or color.  In sensible world, comparisons are
+inherently imperfect: they are unstable, context-dependent, approximate.
+
+But to tell that the equality in sensible world is imperfect means to think
+about a standard -- some perfect equality, compared to which the "real world
+equality" falls short. But what is this standard, the perfect equality, and
+where did we get an idea of it?
+
+Socrates argues that the idea of perfect equality can not be based on
+experience, because a perfect equality is an abstraction. It does not exist in
+the sensible reality, and it belongs to an entirely different ontological
+category. He calls such objects Forms.
+
+From this, Socrates concludes, that we should have known equality from before
+our birth, but then apparently forgotten. Your soul knows Equality, and your
+soul existed before your mortal body. As you live and gather sensory experience,
+this experience reminds you of the forgotten knowledge through the similarity --
+like the lackluster sensory equality reminds you of a perfect equality. This
+enables the recollection.
+
+The Equality is one of the Forms -- eternal, unchangeable objects
+belonging to the ideal realm of Forms. Each Form is, in layman's terms, like an
+essence of a kind of things on Earth. In Plato's writings, Socrates repeatedly
+mentions that our souls possess all knowledge of Forms but they have forgotten
+it as they got embodied on Earth. So, we need to be reminded of it.
+
+Socrates notes, how asking Simmias or Cebes a well formulated question about the
+nature of the Form of Equality produced an immmediate answer. He engages them in
+Socratic questioning: asking and guiding them to the knowledge of universal
+truths they have already had in their souls. When Simmias and Cebes are
+performing the recollection themselves, under his guidance, the dialogue
+illustrates the point of recollection on the second level. Show, and tell.
+
+Funnily enough, before the argument starts, in 73b, Simmias claims that he /knows/
+the argument but asks Socrates directly to /remind/ him of it -- very tongue in
+cheek from Plato. Socrates indeed reminds Simmias of the argument, but in two
+different senses: directly, by stating the argument that Simmias heard but
+"forgot"; and by teaching it to Simmias, which is equivalent to reminding
+Simmias of the truths his soul knew all along. Unfortunately, as I do not read
+ancient Greek, I can't be sure to which extent the wordplay was intentional.
+
+This second possible meaning of /remind/ raises an interesting question: if
+Simmias is recollecting the lost knowledge, it must have to do with one of the
+Forms, but which one?  At first I was inclined to think that the knowledge is
+about the world of Forms, therefore assuming that the world of Forms is a Form
+itself. This, however, seems to be a debatable point among Plato scholars, and
+for a good reason. Plato did not leave us a clear account on it, so we would
+have to deal with nuances such as: does the Form of Forms contain itself (think
+Russel's paradox)? Do we need a Form to explain what's in common between the
+Form of the World of Forms and individual forms, and thus start an infinite
+regress?
+
+A better answer might be to say that Simmias learns something about the world of
+Forms, which is related to all Forms, therefore gets into the domain of
+knowledge accessible by recollection.
+Or, perhaps, it's about the Form of Man or Form of Human Being, specifically,
+which was mentioned in another dialogue, Parmenides.  Throughout the entirety of
+the dialogue, Simmias and Cebes learn about what it is to be a man, how we are
+related to our bodies and souls, what is it to live and to die. The argument
+from recollection is a part of the picture, elucidating the mechanism by which
+we recollect the forgotten knowledge of Forms, accessible to our soul.  Simmias
+and Cebes learn about it, but also experience it firsthand.
+
+
+Through the dialogue form, the readers are witnessing the process, but also
+guided through the same recollection process as Simmias and Cebes. You too did,
+in your soul, know the argument all along, you just needed a reminder. This is
+the third level, and here the text breaks the fourth wall.
+
+Indeed, we are unable to engage with the text interactively, as we could with a
+teacher. Socrates critiques the stale quality of texts in a different dialogue,
+Phaedrus, which is, ironically, a written text itself. In Phaedo, however, we
+see clearly, that even a written text can actively engage reader in a process
+that leads to interesting outcomes for them, very much like a teacher does.
+
+The recollection argument has a unique property: the very act of understanding
+this argument is itself an act of recollection.
+To grasp why sensible equals are deficient compared to the Form of Equality, the
+reader must already possess and use the very concept of perfect Equality that
+the argument claims we've recollected from prenatal existence. Within this
+framework, the understanding is not about recollection -- it is recollection.
+
+Unlike pedagogical texts that invite optional engagement, or rhetorical texts
+that persuade through technique, the Phaedo makes its central claim
+self-exemplifying: understanding requires exercising the very capacity for
+abstract thought that the argument attributes to recollection. The form doesn't
+just illustrate the content -- it is the content first revealed, and then made
+an embodied experience. Perhaps, the highest expression of the art of writing.

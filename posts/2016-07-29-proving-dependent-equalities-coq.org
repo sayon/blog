@@ -10,7 +10,7 @@ I got so annoyed with it that I wrote a little tactic to automatize it a bit.
 
 It does use ssreflect routines but it should not be hard to adapt it to vanilla Coq.
 
-#+begin_src coq
+#+begin_src
 Ltac depcomp H := apply EqdepFacts.eq_sigT_eq_dep in H; 
 apply Coq.Logic.Eqdep.EqdepTheory.eq_dep_eq in H.
 Ltac eq_comp c x y := 

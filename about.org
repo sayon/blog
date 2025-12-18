@@ -2,28 +2,33 @@
 #+toc: nil
 
 * Hello
-My name is Igor Zhirkov, you may encounter me in Nantes, Warsaw, or St.Petersburg.
 
-Keywords: PhD student, Computer Science, programmer, musician, writer.
+Igor Zhirkov, mostly Warsaw or Nantes, between who I was and who I'm becoming.
 
-I am interested in maths, programming, programming languages, automated theorem proving, and system design.
-I have written a [[http://amazon.com/Low-Level-Programming-Assembly-Execution-Architecture/dp/1484224027][book]] about low-level programming for my students; this is a slightly outdated version of the class I was teaching in  
-ITMO university in St. Petersburg, Russia.
+I live by the code: to be and not to seem.
 
-Currently I am pursuing my PhD on verified C refactorings.
+I am interested in philosophy, maths, programming, programming languages theory,
+and system design. I approach everything through language, engineering and systems.
 
-As for music, I am an amateur pianist.
-My preferences are baroque and late-romantic music, progressive rock, jazz fusion, and various types of electronic music. 
+I have written a [[http://amazon.com/Low-Level-Programming-Assembly-Execution-Architecture/dp/1484224027][book]] about low-level programming for my students; this is a
+slightly outdated version of the class I was teaching in ITMO university in St.
+Petersburg, Russia. I've spent around 14 years teaching; I don't do it anymore,
+but you can still check my online course on C hosted on [[https://stepik.org/course/73618][Stepik]] (in Russian).
+
+I am an amateur pianist. My preferences are baroque and late-romantic music,
+progressive rock, jazz fusion, and various types of electronic music. These days
+Bach is my favorite form of meditation -- we all could use some of his mental
+health.
+
+I exist best underwater, for now I am certified as AOWD but I am interesting in going further.
 
 Feel free to drop me a line by [[mailto:igorjirkov@gmail.com][mail]] or in [[https://t.me/igorjirkov][telegram]].
-English, french, german and russian are accepted.
+I speak English, French, German, Russian, and basic Polish.
 
 [[http://paypal.me/igorzhirkov][paypal me]]
 
-This blog is named after my friend Mr. Duck. He is a snobbish, intellectual, and slightly misanthropic.
+This blog is named after my friend Mr. Duck. He is a snobbish, intellectual, and slightly misanthropic gentleman.
 
 #+export_html: <center>
 [[./img/bigduck.png]]
 #+export_html: </center>
-
-I am migrating this site from jekyll to org-mode because of stability reasons. Not all posts are yet moved.
