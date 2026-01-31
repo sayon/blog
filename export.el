@@ -1,4 +1,5 @@
 (require 'ox-publish)
+(require 'subr-x)
 
 (setq pubdir "~/public_html")
 (setq basedir "~/repos/blog")
@@ -20,30 +21,79 @@
       (progn
         (when-let ((contents (org-file-contents filename :noerror)))
           (with-temp-buffer
-            (message filename)
             (insert contents)
             (org-collect-keywords keywords unique directory))
           ))))
 
-(defun my/org-publish-find-excerpt-or-empty (filename) ""
-  (let* ((keyword-list (my/org-collect-keywords '("excerpt") filename))
+(defun my/org-publish-find-keyword-or-empty (filename keyword) ""
+  (let* ((keyword-list (my/org-collect-keywords (list keyword) filename))
          (excerpt (and keyword-list (nth 1 (car keyword-list)))))
     (or excerpt "")))
 
-(defun my/org-sitemap-date-entry-format (entry style project) ""
-       (let ((title (org-publish-find-title entry project)))
-         (if (= (length title) 0)
-             (format "*%s*" entry)
-           (concat
-            (format "{{{timestamp(%s)}}} [[file:%s][%s]] \n {{{div(%s)}}}"
-                    (format-time-string "%d-%m-%Y"
-                                        (org-publish-find-date entry project))
-                    entry
-                    title
-                    (org-macro-escape-arguments
-                     (my/org-publish-find-excerpt-or-empty (org-publish--expand-file-name entry project)))
-                    )))))
 
+(defun my/org-publish-find-excerpt-or-empty (filename) ""
+       (my/org-publish-find-keyword-or-empty filename "excerpt")
+)
+
+
+(defun my/org-sitemap-date-entry-format (entry style project) ""
+       (let* ((filename (org-publish--expand-file-name entry project))
+             (title (org-publish-find-title entry project))
+             (is-draft (my/org-publish-find-keyword-or-empty filename "draft"))
+             (post-date (org-publish-find-date entry project)))
+         (if (string-empty-p is-draft)
+             (if (string-empty-p title)
+                 (format "*%s*" entry)
+               (format "{{{timestamp(%s)}}} [[file:%s][%s]] \n {{{div(%s)}}}"
+                       (format-time-string "%d-%m-%Y" post-date)
+                       entry
+                       title
+                       (org-macro-escape-arguments
+                        (my/org-publish-find-excerpt-or-empty filename))
+                       ))
+             ""
+           )))
+
+
+
+;;(advice-add 'org-export-output-file-name :around #'my/org-export-output-file-name-with-date)
+;;
+(defun vc-rename-current-file-basename (new-name)
+  "Rename current file to NEW-NAME in the same directory, updating VC."
+  (interactive
+   (let* ((old (buffer-file-name)))
+     (unless old
+       (user-error "Current buffer is not visiting a file"))
+     (list (expand-file-name
+            (read-string "New name: " (file-name-nondirectory old))
+            (file-name-directory old)))))
+  (let* ((old (buffer-file-name))
+         (backend (vc-backend old)))
+    (when (buffer-modified-p)
+      (save-buffer))
+    (if backend
+        ;; bypass 'update before move' check
+        (vc-call-backend backend 'rename-file old new-name t)
+      (rename-file old new-name))
+    (set-visited-file-name new-name t t)))
+
+(defun my/list-with-only-empty-strings-p (x)
+  (and (listp x)
+       (cl-every (lambda (e)
+                   (and (stringp e)
+                        (string-blank-p e)))
+                 x)))
+
+(defun my/org-publish-sitemap (title list)
+  "Default site map, as a string.
+TITLE is the title of the site map.  LIST is an internal
+representation for the files to include, as returned by
+`org-list-to-lisp'.  PROJECT is the current project."
+         (let* ((new-list (cl-remove-if #'my/list-with-only-empty-strings-p list))
+                (result (concat "#+TITLE: " title "\n\n"
+                                (org-list-to-org new-list))))
+           result
+           ))
 
 (setq org-publish-project-alist
       (list
@@ -79,6 +129,8 @@
              :sitemap-filename "sitemap.org"
              :sitemap-sort-files 'anti-chronologically
              :sitemap-style 'list
+             :sitemap-function 'my/org-publish-sitemap
+             :exclude-tags '("draft")
              :author "Igor Zhirkov"
              :with-creator t
              :headline-levels 4
@@ -110,5 +162,4 @@
 
 
 (org-publish-all)
-;;(org-publish-project "blog-all")
 ;;(save-window-excursion (async-shell-command "rsync -avLK ~/public_html/ rdt:~/public_html"))

@@ -1,0 +1,86 @@
+#+TITLE: blog-mode
+#+AUTHOR: Your Name
+
+* Overview
+
+A minimal Doom Emacs package providing a minor mode for editing blog posts.
+The mode automatically activates via =.dir-locals.el= when editing files in the =posts/= directory.
+
+** Dependencies
+
+- Emacs 28.1 or later
+- Magit 3.0.0 or later
+- Org mode 9.5 or later
+
+* Installation
+
+** For Doom Emacs
+
+1. Add this package to your =~/.doom.d/packages.el=:
+
+#+begin_src emacs-lisp
+(package! blog-mode
+  :recipe (:local-repo "path/to/blog/emacs/blog-mode"))
+#+end_src
+
+Or if you want to use the absolute path:
+
+#+begin_src emacs-lisp
+(package! blog-mode
+  :recipe (:local-repo "/Users/sayon/repos/blog/emacs/blog-mode"))
+#+end_src
+
+2. Run =doom sync= in your terminal
+
+3. Restart Emacs or run =M-x doom/reload=
+
+The mode will automatically activate for files in =posts/= thanks to the =.dir-locals.el= file.
+
+** Manual Installation
+
+Add to your Emacs configuration:
+
+#+begin_src emacs-lisp
+(add-to-list 'load-path "/Users/sayon/repos/blog/emacs/blog-mode")
+(require 'blog-mode)
+#+end_src
+
+The mode will automatically activate for files in =posts/= thanks to the =.dir-locals.el= file.
+
+* Usage
+
+The mode automatically activates when you open any file in the =posts/= directory via
+the =.dir-locals.el= file located there. You'll see " Blog" in the mode line when active.
+
+The =.dir-locals.el= file contains:
+
+#+begin_src emacs-lisp
+((org-mode . ((mode . blog-mode)))
+ (nil . ((mode . blog-mode))))
+#+end_src
+
+This enables =blog-mode= for all files in =posts/=, with special handling for org-mode files.
+
+** Features
+
+- *Automatic date updates on save*: When you save a blog post, the filename is automatically updated to match the =#+DATE= property in the org file
+- *Date-based filename management*: Files are named with a YYYY-MM-DD- prefix that stays in sync with the =#+DATE= property
+- *Git integration*: File renames are done via Magit to preserve git history
+- *Org-mode integration*: Reads date information from org file properties
+
+The automatic update happens every time you save, so you can change the =#+DATE= property in your org file and the filename will be updated to match when you save.
+
+* Customization
+
+You can add custom keybindings by modifying =blog-mode-map= in your config:
+
+#+begin_src emacs-lisp
+(use-package! blog-mode
+  :config
+  (define-key blog-mode-map (kbd "C-c b p") 'your-publish-function)
+  (define-key blog-mode-map (kbd "C-c b n") 'your-new-post-function))
+#+end_src
+
+* License
+
+MIT
