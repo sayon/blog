@@ -3,7 +3,7 @@
 
 * Hello
 
-Igor Zhirkov, mostly Warsaw or Nantes, between who I was and who I'm becoming.
+Igor Zhirkov, between Nantes and Warsaw, between who I was and who I'm becoming.
 
 I live by the code: to be and not to seem.
 
@@ -12,7 +12,7 @@ and system design. I approach everything through language, engineering and syste
 
 I have written a [[http://amazon.com/Low-Level-Programming-Assembly-Execution-Architecture/dp/1484224027][book]] about low-level programming for my students; this is a
 slightly outdated version of the class I was teaching in ITMO university in St.
-Petersburg, Russia. I've spent around 14 years teaching; I don't do it anymore,
+Petersburg, Russia. I've spent almost 14 years teaching; I don't do it anymore,
 but you can still check my online course on C hosted on [[https://stepik.org/course/73618][Stepik]] (in Russian).
 
 I am an amateur pianist. My preferences are baroque and late-romantic music,
@@ -20,14 +20,14 @@ progressive rock, jazz fusion, and various types of electronic music. These days
 Bach is my favorite form of meditation -- we all could use some of his mental
 health.
 
-I exist best underwater, for now I am certified as AOWD but I am interesting in going further.
+I exist best underwater, for now I am certified as AOWD but I am interested in going deeper.
 
 Feel free to drop me a line by [[mailto:igorjirkov@gmail.com][mail]] or in [[https://t.me/igorjirkov][telegram]].
 I speak English, French, German, Russian, and basic Polish.
 
 [[http://paypal.me/igorzhirkov][paypal me]]
 
-This blog is named after my friend Mr. Duck. He is a snobbish, intellectual, and slightly misanthropic gentleman.
+This blog is named after Mr. Duck (Мистер Утка). He is a snobbish, intellectual, and slightly misanthropic gentleman with a weird world view. He is not my alter ego.
 
 #+export_html: <center>
 [[./img/bigduck.png]]
