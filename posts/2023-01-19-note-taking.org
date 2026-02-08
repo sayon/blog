@@ -144,7 +144,7 @@ Here is an example of a note:
 
 ... and its source code:
 
-#+begin_src
+#+begin_src org
 :PROPERTIES:
 :ID:       22AF419C-C79F-42A6-B7E9-CF7A27DAD5E0
 :END:
@@ -178,9 +178,9 @@ Human-crafted systems have goals.
 - In order to create systems it is necessary to engage in
   "[[id:4C0E5272-CC97-40B5-BA56-FD15F83B23B8][Systems thinking]]"
 
-#+setupfile: org-header.org
-#+created: [2022-11-18 Fri]
-#+last_modified: [2022-11-18 Fri 12:16]
+ #+setupfile: org-header.org
+ #+created: [2022-11-18 Fri]
+ #+last_modified: [2022-11-18 Fri 12:16]
 
 #+end_src
 
@@ -298,24 +298,6 @@ The current e-ink tablets were not convincing to me.
   #+caption: My favorite pen since my teen years is Sheaffer Fashion.
   [[../img/pen-of-choice.jpeg]]
 
-#+begin_export html
-<div id="disqus_thread"></div>
-<script>
-    var disqus_config = function () {
-    this.page.url = "https://rubber-duck-typing.com/posts/2023-01-19-note-taking.html";
-    this.page.identifier = "2023-01-19-note-taking";
-    };
-    */
-    (function() { // DON'T EDIT BELOW THIS LINE
-    var d = document, s = d.createElement('script');
-    s.src = 'https://rubber-duck-typing-com-1.disqus.com/embed.js';
-    s.setAttribute('data-timestamp', +new Date());
-    (d.head || d.body).appendChild(s);
-    })();
-</script>
-<noscript>Please enable JavaScript to view the <a href="https://disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript>
-
-#+end_export
 
 
 * Footnotes
