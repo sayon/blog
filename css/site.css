@@ -284,13 +284,13 @@ body blockquote cite::before {
 
 /* Ordered and unordered lists in content */
 body #content ol,
-body #content ul ul {
+body #content ul {
   margin: var(--space-sm) 0;
   padding-left: 1.5em;
 }
 
 body #content ol li,
-body #content ul ul li {
+body #content ul li {
   margin-bottom: 0.5em;
   line-height: 1.6;
 }
@@ -299,8 +299,13 @@ body #content ol {
   list-style: decimal;
 }
 
-body #content ul ul {
+body #content ul {
   list-style: disc;
+}
+
+/* Nested lists should use circle bullets */
+body #content ul ul {
+  list-style: circle;
 }
 
 /* Horizontal rules */
@@ -500,14 +505,14 @@ body #disqus_thread {
 }
 
 /* Post list (sitemap) - enhanced design */
-body #content ul {
+body #content > ul {
   list-style: none;
   padding: 0;
   margin: var(--space-md) 0;
 }
 
 body #content > ul > li {
-  margin-bottom: var(--space-lg);
+  margin-bottom: var(--space-xl);
   padding: var(--space-md);
   background: var(--bg-primary);
   border-left: 4px solid var(--accent-blue);
