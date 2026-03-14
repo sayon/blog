@@ -1,0 +1,354 @@
+#+setupfile: setup.org
+#+title: Challenges of specifying and compiling gas-fueled languages
+#+date:<2026-03-14 Sat>
+#+excerpt: Gas-metered platforms break the usual compiler correctness rules.
+
+In the [[file:2024-09-20-bugs-in-compilers.org][previous post on compiler correctness]] we asked: how do you know a
+compiler has a bug? The answer is surprisingly hard. Most languages have no
+formal spec. Comparing program behavior is undecidable. Programs may have
+multiple possible behaviors, or even no specified behavior at all. Even experts
+disagree on what counts as a bug.
+
+Some programs run on platforms where every instruction costs money. Solidity
+programs, for example, compile to EVM bytecode. Each bytecode instruction
+consumes /gas/. You buy gas with dollars or cryptocurrency, then fuel your
+virtual machine sufficiently so it can complete the run. Should you run out of
+gas mid-execution, your computations will just heat the atmosphere. Money
+wasted, results disappeared.
+
+People familiar with PLT know gas by the name /fuel/.
+
+Compilers can't ignore gas. Two problems emerge. First: programs can read their
+gas meter, directly or indirectly. Two compilers targeting the same platform
+will produce code that burns gas at different rates, the program can see this
+and act differently. Second: different platforms measure gas differently. A
+compiler targeting multiple platforms must track multiple fuel meters.
+
+In this post I'd like to explore the different roles of gas and why it affects
+the observable behavior beyond programs running out of gas. For now, we focus on
+the proper problem statement and investigate the tradeoffs between the
+predictability of gas consumption and the scale of compiler optimizations. The
+problems are universal to any language where the program behavior may depend on
+the exact gas meter values, but if we speak about Ethereum, the most popular
+language for the contracts there is Solidity. So I will use it to illustrate my
+points.
+
+
+* Behavior equivalence and extensional correctness
+
+We have to start with the program behaviors in general. How can a program
+behave, in general?  It can produce output, then terminate, panic, or loop
+forever; or it can keep producing output indefinitely. The common approach,
+/extensional compiler correctness/, says the behavior is a sequence of /observable
+events/, such as external calls or I/O.
+
+For something like Solidity, the events are logs, calls, storage writes; the
+behavior kinds are, roughly:
+
+- success with: a trace of events, some return data, and the leftover gas;
+- revert with data, and the leftover gas;
+- panic / OOG (different from revert).
+
+The semantic of Solidity language should define a behavior for a valid Solidity
+program. The semantic of its compilation target, EVM, defines behavior for EVM
+bytecode. /Extensional compiler correctness property/ says: a compiler is correct
+if the behavior of EVM bytecode matches the behavior of Solidity program.
+
+If a Solidity program has more than one possible behaviors, the compiler should
+select one and make it the behavior of compiled EVM bytecode. It is a
+refinement: we may lose some possible Solidity behaviors, but we don't let new
+behaviors in.
+
+In a more general case, both source and target languages may allow multiple
+defined behaviors. Then a compiler is extensionally correct if all behaviors of
+compiled program are in the set of behaviors of source program.
+A bit simplified:
+
+$$\forall P, Behaviors_{target\_language}(compiled(P)) \subset Behaviors_{source\_language}(P)$$.
+
+** Undefined behavior
+
+A program may also violate the language rules. Such programs are meaningless.
+Compiler might reject them outright or silently compile them into code that does
+anything at all.
+
+Which programs have a defined behavior, and which do not? In most languages, the
+rules are notoriously complex. Worse even: languages lack standards, so these
+rules are not even put together in a coherent description.
+
+Are two programs with undefined behavior equivalent? Some theorists say yes,
+undefined is undefined. Engineers disagree -- compilers usually produce
+something mildly predictable even from programs with undefined behavior. A
+program having, on paper, undefined behavior, stays docile for years, until some
+edge case drives it crazy and it corrupts your database. Engineers have to work
+with languages and codebases where undefined behavior will eventually happen, so
+they strongly prefer predictable, not chaotic, undefined behavior.
+
+* Resource-observational equivalence
+
+A trace of observable events is too simplified to catch all important properties
+of programs. Say, the updated compiler produces functionally equivalent, but
+100x slower programs. It reads like a bug  and we will probably call it so -- so
+is this compiler still "correct" in the mundane engineering sense?
+Another example: the new optimization pass made it so that most of the time the
+code is running 2x faster, but on rare occasions it lags and stops responding
+for an hour. Is it acceptable? Now what if the lag is not an hour, just one
+extra microsecond, but the attacker can exploit it indefinitely and keep your
+code lagging forever? Finally, imagine you are a mobile developer and after
+updating your compiler whatever app you build for Android drains the battery in
+an hour. Is it a compiler bug?
+
+Extensional compiler correctness is oblivious to the resource consumption,
+including time and power; it does not understand average or worst case; it can
+not capture the time to respond. It is all about "what" and nothing about "how".
+
+But it gets worse. If the program can inspect the "how", then optimizations
+change semantics.  Imagine a function $f$ that typically takes 11ms to complete,
+and the following code.
+
+#+begin_src
+started = clock()
+f();
+elapsed = clock() - started;
+
+if (elapsed < 10ms) {
+    print "yes"
+}
+else {
+    print "no"
+}
+#+end_src
+
+We branched on the timer value: if the program has run quicker than 10ms, do
+one thing, otherwise do another. Now suppose we launch compiler with different
+optimization options, or we have updated the compiler, or switched to a better
+one. Function $f$ is now optimized and runs under 10ms every time. The
+optimization changes the behavior, not just /how/ but /what/!
+
+* Gas
+
+Gas is one of exposed resources, and it is hard to ignore. Of course, we care
+about compilers producing gas efficient programs that cost less, and we care
+about gas attacks too. But if a program can also read the gas meter, the same
+way they could read a timer, they can branch on the gas value, producing
+different behaviors. Again, the resource is not just affecting "how" the program
+runs but also "what" it does.
+
+** Explicit dependency: branching on gas meter
+In Solidity, ~gasleft()~ reads the gas meter.
+
+#+begin_src solidity
+if (gasleft() > 100000) {
+  assembly {
+    invalid()
+  }
+  // be silly and crash if we have too much gas
+}
+#+end_src
+
+The official documentation mentions ~gasleft()~ twice: [[https://docs.soliditylang.org/en/latest/units-and-global-variables.html][here]] and [[https://docs.soliditylang.org/en/latest/units-and-global-variables.html][there]]. It is not a
+lot of information -- for example, to which extent can we reorder ~gasleft()~
+calls? How do optimizations affect its value, in general? So for now let us
+informally interpret ~gasleft()~ as a built-in that outputs a numeric value of the
+gas meter in a fully deterministic way. This is primitive, but intuitive, and we
+need to start somewhere.
+
+** Implicit dependency on gas: calls and try/catch
+
+Unlike in the timer example, we can diverge on gas values even without reading
+the gas meter. Again, two compilers may compile this fragment so that the
+resulting code diverges on the same input (and given the same initial gas).
+
+#+begin_src solidity
+try {
+  somecall(); // consume gas
+}
+catch {
+  // executes if `somecall` did not get enough gas
+}
+#+end_src
+
+In the current iteration of Ethereum protocol, there are two options regarding
+how much gas to forward for a call:
+
+1. explicitly tell how much gas we forward[fn:1] , or
+2. use the default -- which is set to 63/64 of the remaining gas.
+
+The unbound calls, like in the example above, will provide a different amount of
+gas to the callee depending on the remaining gas at the moment of the call.
+The rate of fuel consumption, in turn, depends on the compiler optimizations.
+The callee then can also diverge, because the exact value of gas it received is
+different.
+
+** Optimization goals
+So, gas is a resource, but it actively bleeds into observable behavior even if
+we don't explicitly keep track of the gas gauge. Gas optimizations affect
+behavior. Still, one of raisons d'être of compilers and higher level languages
+is to optimize programs, and do it better than humans. For most Solidity
+programs we want to get away with as little gas as possible, because gas costs
+money. Do we want to turn off optimizations to maximize predictability of gas
+consumption, then force all compilers to adhere to that? This contradiction is
+the core of the problem we uncovered here.
+
+To sum up: optimizations alter behaviors that depend on resources, including
+gas. As long as you have one compiler, you may get away with hand-waving about
+how programs should behave. "Just compile and run and see what's it doing."
+With more compilers in play we require a contract between them. This contract
+should describe what can we expect from a program, no matter which compiler we
+use; it also elucidates how correct optimizations may interact with
+gas-dependent behaviors.
+
+* Roles of Gas
+To make matters more complicated, gas is a beast with not one, but three heads.
+Each head bites the compiler correctness issue from a different side.
+
+*Gas is an observable effect*. Publish the value of ~gasleft()~ in the storage, or
+introduce gas-dependent control flow -- it is now affecting the trace.
+
+*Gas is a resource bound.* An optimization can make a cold path more expensive to
+reduce the average cost. Then unoptimized code may complete when provided the
+bare minimum of gas, but optimized code on the cold path will run out of gas.
+Most formal specifications of compiler correctness will treat it as a change of
+behavior, meaning that such compilation is not correct.
+
+*Gas is a part of execution environment.* A platform upgrade adjusts the cost of
+instructions, or changes how gas passes through cross-boundary call. Programs
+that were terminating correctly may now run out of gas. In Ethereum ecosystem
+this has already happened e.g. EIP-2929 repricing, or EIP-1884.
+
+We can classify programs by how gas affects their observable behavior:
+
+- gas-sensitive :: behavior depends on exact gas (reading gas meter value,
+ branching on it, putting it to storage etc.). Gas is an observable effect
+ here.
+- gas-insensitive :: changing gas consumption does not change observable trace,
+ unless we run OOG. Gas is just a resource bound here, except for potential OOG
+ that we can observe.
+- gas-fragile :: programs break if we change the protocol parameters such as gas
+  budgets / stipends / EIP-150 gas forwarding 63/64 cap/instruction costs. The
+  way environment treats gas matter here.
+
+Note that these are not properties of a single contract; they are properties of
+a contract execution, which means *they span across the whole call tree*. A
+contract might be gas-insensitive, but once it calls another, gas-fragile
+contract, the whole thing becomes brittle. In an open ecosystem like Ethereum,
+this is important, because if you call an upgradable contract, you have to trust
+that the upgrade won't break your gas assumptions about it. Of course, the
+callee has to be /aware/ of such assumptions in the first place.
+
+* Multiple backends give resources different meaning
+
+The second problem mirrors the first: compiling the gas-aware language for a
+target with different gas consumption. How to compile Solidity for gas-fueled
+RISC-V? Maybe we should treat Solidity gas as some abstract resource, the
+platform-native gas? Then retrieving the exact gas values should be either
+prohibited or made into platform-dependent language extension. Or, perhaps,
+Solidity gas should map precisely to EVM gas, its native counterpart, but on
+other platforms we will have to simulate it. Then the EVM gas becomes
+meaningless on other platforms, because they only accept their proper gas as a
+payment for running code. Programs won't survive depleting neither native nor
+simulated gas.
+
+We circle back to ~gasleft()~ here: its intention seem to reflect an approach
+"just expose the internals as they are". ~gasleft()~ inherits its semantic from
+EVM and the protocol in general. The meaning is platform-specific and, for the
+higher-level language, almost accidental. Trying to support another compilation
+target when Solidity and EVM are tightly coupled together feels like compiling
+x86 assembly to ARM, while trying to keep stack usage perfectly aligned.
+
+Worse even: in EVM, the cost of an instruction that touches memory depends on
+the current memory size (roughly a quadratic law). Storing something outside the
+current memory bound triggers expansion and you pay for every new byte. Move a
+memory-touching instruction  earlier and you might expand memory earlier. Later
+instructions touching memory will do it at a change cost. If we want a perfect
+gas virtualization, we have to account for this too. And moving around memory
+operations for optimization purposes may affect observable behavior through
+meddling with the gas consumption.
+
+There is another language that likes to expose features from the lower level of
+abstraction -- the good old C. Writing directly to registers, switching CPU
+modes and so on belong to platform-specific extensions, implemented in compilers
+supporting the respective platforms. They are not portable by definition, and
+portable code is decoupled from them. Macro definitions are often used for that.
+Gas is more pervasive; without a gas definition generic enough to describe EVM,
+and RISC-V, and other targets, we have to virtualize EVM on other targets.
+
+Any gas-aware language will have to deal with both problems: how to support
+multiple compilers for the same target, and how to support multiple targets.
+My intuition is that to solve both of them we need to figure out a formal gas
+consumption model and guarantees that it can realistically provide. Furthermore,
+we won't be able to have a singular definition of correctness, because there is
+a tradeoff between gas consumption predictability and gas efficiency. These
+compromises might be more or less friendly to the portability of contracts. To
+advance further, we need to figure out the semantic of gas for the language.
+Can we do it for Solidity?
+
+* Semantic of Solidity
+Unfortunately, it seems the most popular language to write contracts in Ethereum
+ecosystem is long past the no-return point. Now, chaos dragons live here.
+
+First, Solidity does not have a complete specification separated from compiler
+implementation. This means that the default compiler ~solc~ *is* the description
+of the language. So, if your compiled contract acts weirdly, it is challenging,
+if even possible, to diagnose whether it is a compiler bug, a bug in the
+language specification (which does not exist), or a correct, albeit unintuitive,
+behavior.
+
+Second, other Solidity compilers have to reinvent the language specification by
+reverse engineering the existing compiler, ~solc~. This includes separating out
+the compiler bugs. Without a language standard decoupled from ~solc~,
+"correctness" is just "what the other guy did." But we do not have a choice at
+this point.
+
+Third, ~solc~ is written in C++, a language rich in undefined behaviors, which are
+sometimes borderline impossible to catch. Therefore, ~solc~ itself is likely to
+exhibit undefined behavior on some inputs. Undefined behavior in the compiler
+may be contagious to the programs it operates on. This makes using ~solc~ as a
+source of truth for the semantics of Solidity even more dangerous. Tomorrow we
+recompile ~solc~ with a new version of ~clang~ or change the arguments in its
+invocation. After that, it will perhaps compile Solidity programs into the
+bytecode with diverging behavior.
+
+The Gas Dragon enters the club and finds itself at home. The gas consumption is
+treated as an implementation detail, the guarantees about it are not documented.
+Without an explicitly specified interface, the [[https://www.hyrumslaw.com/][Hyrum's law]] applies even to
+smallest user bases.
+
+A theorist in me shouts: do not make your programs dependent on exact gas
+values! Do not make strong assumptions about gas! Distill a language standard
+describing "abstract gas" which is guaranteed to satisfy 42 different formal
+properties; your programs should respect the constraints of the standard, or
+their behavior won't be well defined. In case of a niche language without an
+established codebase, used mostly by programmers well versed in CS,
+perhaps. We can even throw in something to provide static guarantees about gas
+consumption, maybe linear types, resource monads etc. But can we do that to a
+language with millions of lines of code already written and deployed? We know
+how well such retrofitting worked out for the mess of C(++), right. Ask a couple
+of your fellow C programmers to recite the precise definition of a pointer, then
+check how far they diverge from the standard. A pointer is not "just a number",
+and null pointer is not zero (if you think of /zero/ as a number with all cleared
+bits, not the literal ~0~ in a pointer context...)
+
+So, I don't think we can universally retrofit some abstract gas semantics to
+Solidity without dealing with the same problems as early standards of C, which
+were trying to harmonize some thousand programmers with diverse backgrounds and
+qualifications, and diverging ideas about pointers, memory, type conversions and
+so on. But maybe we can contain the damage or at least take lessons because any
+future gas-aware language will face the problem of gas-dependent observable
+behaviors. Solidity, because of how popular it is, shows us how real people
+write contracts, what are the challenges, what do they really want from gas
+meter.
+
+
+* What then?
+I believe we still have to investigate the relationship between gas and program
+behavior deeper. It will most certainly be a semantic parameterized with the
+protocol version; it may describe several possible tradeoffs between predictable
+gas consumption and optimizing the costs; it should account for memory expansion
+costs and make clear the possible reorderings and optimizations. Even if we
+won't be able to fit any or all of them neatly into Solidity, it will give us
+ideas about how to design better gas-aware languages. But I'm leaving this for
+the next time.
+
+* Footnotes
+[fn:1] In reality, what will be send via a bounded call is ~min(63/64*gasleft(),provided_gas_value)~.
