@@ -39,7 +39,7 @@ David Hume, a philosopher.
 Hume’s account on causes and consequences is highly empiric. What an observer
 (even ideal one) can observe about two events A and B is:
 
-- $A$ occured before $B$.
+- $A$ occurred before $B$.
 - $A$ and $B$ are close in space and time. Or they are connected by a chain of
  events, where each link is a relation between two events which satisfies
  these properties.
