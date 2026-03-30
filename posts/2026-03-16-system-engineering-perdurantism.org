@@ -1,0 +1,319 @@
+#+setupfile: setup.org
+#+title: How 4D objects found their way into system engineering
+#+date:<2026-03-16 Mon>
+#+excerpt: What system engineers learned from philosophers of time and space.
+
+
+Engineers need a way to talk about the world. They need to agree on what exists,
+what matters, and how to describe it.
+
+For example, making an online shop means automating a part of some organization
+which has employees, clients, logistics, processes, reports to the tax office
+and so on.  Usually, a team of engineers works on this automation. That makes
+three systems involved: the organization and its clients is the supersystem, the
+automation is the target system, and the developer team is the third one.
+The system engineering approach includes describing these systems and their
+interactions.
+
+For these descriptions, engineers use /ontologies/ -- frameworks that carve the
+world into categories useful enough to work with. In this post I will explore
+why a common-sense approach to descriptions, familiar to every programmer, is
+problematic, and less intuitive but more rigorous alternatives.
+
+* Common sense ontology
+
+Let's start with an averaged, popular, "common sense" ontology. It descends,
+loosely, from Aristotle, and pictures the world in a straightforward way:
+
+- The world consists of objects, which occupy three-dimensional space.
+- Each object carries attributes.
+- Objects have types, and types may belong to broader, more generic types.
+- Attributes of a particular object also have types which, in turn, may belong
+  to broader supertypes, and so on.
+
+If you worked with any widely used programming language, this way of thinking is
+likely natural for you.
+
+Take /Garfield/. He is an object of type /cat/. A /cat/ belongs to a type
+/animal/, which is a subtype of /living being/, and so on. His attribute
+/color/ is set to /orange/. This orangeness is an instance of the attribute
+/orange/ of type /color/, belonging to an attribute supertype /visible quality/.
+
+If /Garfield/ has a son, /Barfield/, we record a /son/ attribute on
+Garfield pointing to /Barfield/, and a /father/ attribute on Barfield
+pointing back. The relationship spans over two separate places -- one on
+each object -- rather than in a single, stand-alone description.
+
+Now suppose Garfield goes for a walk. To represent this, we update his
+coordinates. We change an attribute, and then change it again, and again.
+But this ontology has no way to express the walk itself. It can describe where
+Garfield is; it cannot describe what Garfield is /doing/. Change, in this
+framework, gets lost in the cracks between discrete, isolated snapshots of reality.
+
+* Ontologies for software engineers
+
+Software engineers in particular lean on ontologies for at least two reasons.
+
+First, as any kind of engineers, they need to describe their process by which
+they build things -- the teams, the customers, the platforms.
+
+Second, the software itself must model whatever real world processes it
+automates. [[https://en.wikipedia.org/wiki/Variety_(cybernetics)][Ashby's law]] implies as much: a controller must match the variety of
+the system it controls, and a model that misses important structure will produce
+software that misses important behavior.
+
+Can't we just use the tools directly: types in programming languages, databases,
+data formats? In practice, they fall short in expressivity. Some examples:
+
+- A relational database cannot directly express a many-to-many relationship --
+  say, which authors wrote which books -- so we invent a junction table, a table
+  that names no real thing in the domain and exists only to work around a
+  limitation of the data model. Notice how it echoes the Garfield/Barfield
+  example -- relationships are in general problematic for the common-sense
+  ontology.
+- Older versions of Java can't express "exactly one of these three shapes," so a
+  sum type gets encoded as a class hierarchy with visitors and downcasting --
+  service machinery that names nothing in the domain.
+- C has no closures, so they are modeled using a function pointer and a ~void*~ context.
+- Languages without optional types force us to use sentinel values -- ~null~, ~-1~, the
+  empty string -- to encode absence, although "this value might not exist" is the
+  real domain concept.
+
+A fitting ontology describes the domain at the level we actually think about it
+-- higher than any single implementation language, and free of its accidental
+machinery.
+
+* Change is a challenge
+
+Not all ontologies are equally useful to model reality. An ontology used in
+systems engineering must handle four things well[fn:1]: particular things, types of
+things, relationships between things, and changes. The "common sense" ontology
+stumbles on relationships and struggles with change.
+
+Relationships split apart. The bond between Garfield and Barfield is
+scattered across two attributes on two objects. If I discover that
+Garfield is not really the father, I must find and fix both halves
+independently. Nothing in the ontology ties them together. We lose the intuitive
+and essential quality of father-son relationship -- that if you are a son of
+/someone/, that /someone/ should also be your father, and vice versa.
+
+It is worse for the changes. This ontology simply provides no way to express
+that things evolve. But software systems constantly and unpredictably evolve. To
+expand, software system is a complex node in a network of interconnected,
+interacting, complex systems, which are all changing and trying to adapt to each
+other. An ontology that can't describe changes properly leads to at least three
+problems:
+
+*The snapshot problem.* Every description is a frozen moment. When something
+changes, you produce a new snapshot. But the ontology draws no line between the
+old picture and the new one. The connection exists only in someone's head.
+
+*The moving target problem.* Pragmatically, describing a complex system takes
+time. If the system evolves faster than we are able to describe its snapshots,
+the description will always be obsolete and inaccurate. What good is it then?
+
+*The identity problem.* What makes two things the same thing? If we gradually
+replace every plank in a ship, is it the same ship? If we rewrite every line in
+a software module, is it the same module, and does the old license still apply?
+If every member of a team is replaced, is it still the same team, and does it
+hold the same knowledge? Common-sense ontology tracks attributes of objects, but
+when all the attributes change, it can't draw a connection between the object
+before and after changes.
+
+Look at a classical example of how identity problem bites us. Suppose my friend
+John had long hair, but shaved his head; now he's bald. Let's talk about two
+moments in time: /before/ and /after/ shaving. After shaving, I believe, John is
+still /the same person/:
+
+/John (before shaving, hair) = John (after shaving, no hair)/
+
+However, John was always separable from his hair -- that's what allowed to shave
+him, anyway. Consider hairy John, but without his hair; obviously, because he is
+indistinguishable from a shaved John:
+
+/John (before shaving, no hair) = John (after shaving, no hair)/
+
+Having these two equations, by using symmetry and transitivity of equality, we
+infer:
+
+/John (before shaving, no hair) = John (before shaving, hair)/
+
+But it does not make sense -- these are different 3D objects! Such intuitive
+reasoning about equality between 3D objects undergoing changes is inexact and
+inconsistent; sometimes, it quietly leads us astray. In this example,
+we started from the (unfounded) substantive claim that John persists through
+change (John-before = John-after) and then treated him as something we can
+substitute in other statements across time. Our framework can't coherently
+support such substitutions across time.
+
+We might expect the major systems engineering standards to offer clean
+solutions, or at least systematic approaches to problems this pervasive.
+Unfortunately, some of them are still catching up.
+
+* How system engineering standards struggle with changes
+
+Widely used enterprise architecture frameworks, such as TOGAF, Zachman, and
+ArchiMate, do not solve these problems at the level of ontology. Instead, they
+work around them.
+
+The usual approach goes like this:
+
+1. Describe the system as it is now.
+2. Describe how you want it to be.
+3. Identify the gaps between the current and desired systems, build a roadmap.
+
+TOGAF's Architecture Development Method formalizes this into phases. Each phase
+produces documents and diagrams that represent a snapshot of the system.
+Engineers keep snapshots connected through reviews, processes and conventions.
+But the ontology itself can not represent a transition between snapshots.
+Transition is implied, not modeled.
+
+The identity problem is left to human judgement, armed with the robust weaponry
+of "following conventions". You might wonder: if the system has been migrated to
+the cloud, refactored, had its database replaced, while the development team
+rotated three times, is it /the same/ system, team, process? TOGAF gives a clear
+answer: whatever the governance board decides. This risks inconsistency, and
+attempts to model both current and future states often end up blending them
+together, or mixing them up.
+
+So, when a standard does not provide native ways of describing changes, people
+try to make up for it with processes, discipline, and documentation. This
+brittle practice works until someone changes jobs, retires, budgets get cut, or
+when the team just can't keep up with complexity and the pace of changes.
+
+However, there are ontologies in other system engineering standards that handle
+changes more gracefully. They place objects not in three-dimensional space, but
+in four-dimensional space-time, so an object extends through time the way it
+extends through space.
+
+* Benefits of perdurantism
+
+The key is to stop thinking of objects as three-dimensional things that
+persist through time, and start thinking of them as four-dimensional things that
+extend through time. A cat does not exist "at" various moments; it is a long,
+winding entity stretched across space-time, spanning from its first cry to the last nap.
+We only get to see a thin slice of it -- the cat right now.
+The cat-on-Tuesday and cat-on-Wednesday are both connected parts of the cat,
+just  as its ears are connected to its head. An Aristotelian cat was made of space and time
+happened to it; nowadays, cats are made of space, and time. This idea is called
+4D-/extensionalism/, or /perdurantism/. The common-sense ontology is an example of
+the opposite approach, /endurantism/, which posits entities are wholly present at
+each moment.
+
+Perdurantism is not a trick of language. It restructures the ontology and takes
+on the problems we identified.
+
+*The snapshot problem disappears.* Two snapshots of a system are no longer
+isolated pictures that someone must mentally connect -- the system itself is the
+connection.
+
+*The moving target problem becomes manageable.* You can describe whatever temporal
+extent you know about and leave the rest open. The system grows a new temporal
+part tomorrow; you add the description of that part when you have it.  The
+existing description is not "outdated" — it is a complete and accurate account
+of the portion of space-time it covers. You are not racing to finish before
+reality moves on. You are building a description that extends alongside reality.
+
+*The identity problem gets a better framing.* The ship with all new planks is the same 4D
+ship: an early temporal part has old planks, a later temporal part has new ones,
+and both parts belong to the same 4D ship. The software module rewritten line by
+line is one 4D entity whose later temporal parts contain different code. The
+team whose members have all been replaced is one 4D team: its early parts
+include Alice and Bob, its later parts include Alex and Rob. The knowledge that
+the team possesses, however, also gets localized in space-time, so it can be
+lost if all its bearers leave the team.
+
+** Robustness of perdurantist solution
+
+In safety engineering there is a /hierarchy of controls/, a framework used to
+minimize or eliminate hazard exposure, ranked by effectiveness in preventing
+failures:
+
+- Elimination :: remove the hazard entirely;
+- Substitution :: replace with something safer;
+- Engineering controls :: physical barriers, interlocks; think about trying to fit USB cable in a 3.5mm jack.;
+- Administrative controls :: prevention through rules, procedures, training;
+- Warnings and personal protection equipment :: last resort when everything else fails.
+
+Classical endurantism can't solve identity problem when the object changed, so
+the answer is delegated to boards, conventions, policies. The model itself is
+silent, so humans compensate with *administrative controls*. Contrarily to that,
+in perdurantist frameworks, the identity question dissolves at the ontological
+level, and structure of the model precludes the ambiguity.  That is a move to
+level 3 -- *engineering control*. The constraint is now in the architecture of the
+representation itself, not in human process layered on top.
+
+It does not mean that administrative controls are eliminated completely, as we
+still need decisions about granularity (what warrants a new temporal part?) and
+event boundaries (what triggers a new slice?). But these questions are now
+formalizable within the model, so they can themselves be pushed toward level 3.
+Simpler frameworks can't even express the question clearly.
+
+For this kind of power we pay with complexity. A 4D ontology is harder to learn,
+and the models it produces look unfamiliar to engineers raised on
+entity-relationship diagrams and class hierarchies. But the payoff is an
+ontology where change and identity are built into the foundations.
+
+* Origins of perdurantism
+
+The idea that objects extend through time came from philosophers, debating how
+ordinary objects persist. One camp -- the /endurantists/ -- held that an object is
+wholly present at each moment it exists. The other -- the /perdurantists/ --
+argued that objects have temporal parts, just as they have spatial parts.
+
+There was a related debate on time: /presentists/ think that only /now/ exists, and
+/eternalists/ consider time is eternal, so what was in the past or will be in
+the future simply /exists/.
+
+- Eternalism pairs naturally with perdurantism: if all times genuinely exist,
+  then an object's temporal parts at different times all exist too.
+- Presentism pairs naturally with endurantism: if only the present exists, there
+  are no past or future temporal parts to have.
+
+Other pairings are possible but problematic, so let's stick with the classical
+ones. Common-sense ontology is endurantist and presentist, 4D-objects are
+perdurantist and eternalist.
+
+Quine developed early versions of perdurantism; David Lewis gave it its most
+influential formulation; Ted Sider later provided rigorous formal defenses.
+
+
+Chris Partridge and his colleagues at KPMG Consulting transfered the ideas from
+philosophy to engineering in the late 1980s--early 1990s. Working on a legacy
+modernization project in the finance sector, they developed BORO -- the Business
+Objects Reference Ontology. BORO explicitly adopted perdurantism for a practical
+reason: when two departments disagreed about whether a reorganized division was
+"the same" entity, BORO gave them a framework to describe exactly what had
+changed and what had not, without requiring anyone to win an argument about
+identity. Partridge described the method in [[https://www.amazon.com/Business-Objects-Re-engineering-Chris-Partridge/dp/0955060303/][his book]] and BORO went on to be
+applied in finance, defence, energy, and oil and gas.
+
+From there, BORO's ideas passed into the IDEAS Group which created a shared
+formal ontology for data exchange between defence departments of US and their
+allied countries. The ontology development was led by Ian Bailey of Model
+Futures and BORO Solutions contributed too.
+
+The aforementioned DODAF framework absorbed this foundation; in its second
+version it introduced DM2, the four-dimensional and extensional DoDAF
+Meta-Model.
+
+Another branch: ISO 15926, a standard developed for the process industries. It
+grew out of a European Union ESPRIT project called ProcessBase, begun in 1991,
+and was further developed by the EPISTLE consortium through 2003 under the lead
+of Matthew West at Shell. Its problem was lifecycle data integration for
+industrial plants: assets were built, modified, maintained, and decommissioned
+over decades. BORO seems to be an influence here as well, but ISO 15926 also
+had its own independent development history rooted in industrial data
+management.
+
+In all cases, the perdurantist approach is not adopted because of its elegance,
+but because people ran into real problems that conventional ontologies could not
+solve. The philosophy provided solutions and useful ways of thinking.
+
+But I believe we can do even better. In the next post I'll explore how the ideas
+of a lesser known Napolitan philosopher from XVIII century could augment
+perdurantism further.
+
+* Footnotes
+
+[fn:1] Taken from the [[https://www.amazon.com/Business-Objects-Re-engineering-Chris-Partridge/dp/0955060303/][book]] of Chris Partridge, a lead ontologist of [[https://en.wikipedia.org/wiki/BORO][BORO]].

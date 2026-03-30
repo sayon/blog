@@ -1,0 +1,70 @@
+#+setupfile: setup.org
+#+title: What is it like to be a man but a bat?
+#+date:<2026-03-23 Mon>
+#+excerpt: A wizard turns me into a bat, but is there anyone to notice?
+
+There seem to be at least two problems with the inaccessibility of mental states.
+
+First, communication. Our language is a tool to communicate publicly; it has no
+good words to describe private experiences, the nuances of "what is it like".
+Bodily sensations give us some grounding, because I can tell you how grief, or
+sadness, or shame feel in my body; but the richness of my mental states is not
+exhausted by how I feel it in my body. What does it feel like to integrate your children
+into your sense of self?
+How differently does praise land when you are ill?
+How does it feel to sit when everyone around you stands?
+
+We employ metaphors, but words themselves don't make you feel. Art is ambiguous
+and imprecise in some ways, but reaches deeper when it works. We describe the
+context, the narrative, trying to create a context for the feel to respond in
+the addressee. Limited as it is, this is the best we can do for now.
+
+If our mental states are physically determined, we could potentially make some
+device that would "make us feel" in certain ways, with some accuracy. It is, of
+course, not a straightforward task, because we already know that there is no
+one-to-one mapping between neural activation patterns and our mental activity.
+Even things like vision can be realized by different parts of the brain, so if I
+feel redness in some way, physically this is encoded in my brain state in a way
+that may not be directly transferable to a different brain. At least partly,
+this is also shaped by my personal life history and the way my brain was trained
+to recognize colors, shapes, and, generally, make sense of the
+noisy visual input from my retina.
+
+
+The second reason is also related to our personal life story. I use the bat here
+simply as a convenient image of radical transformation, not as a link to Nagel's
+line of argument.
+
+I can't really feel the world like a bat feels it. First, bats' perception
+structures the world by sensory capacities humans lack; it's hard to imagine
+echolocation the way bats feel it [fn:1]. Second, our mental state depends on both
+biology and past experience. If I ask a wizard to turn me into a bat but leave
+all my memory and cognitive capabilities intact, I will likely experience the
+world not as a bat, but as a human-transformed-into-bat.
+
+Just like Arthur from the cartoon who broke the heart of a poor squirrel, I
+won't feel the world as a bat, and I won't relate well to either humans or bats.
+
+  [[../img/arthur-squirrell.jpg]]
+
+
+My experiences also shape my meaning-making faculty. When I look at a specific
+collection of atoms, I see an object, a book; when I look inside, I see the
+letters beyond ink traces, the meaning behind words.
+To /really/ experience the world as a bat I have to forget my history and all the
+skills I have acquired through my lifetime. Whether something substantial is
+left of me after that, I do not know.  I would lose the forms of language,
+reflection, and narrative self-understanding through which I now organize my
+life. Likely after this transformation, there won't be any /me/ to experience the
+world as a bat and to make sense of it. This feels close to a complete
+self-erasure.
+
+Moreover, like a newborn who can't immediately figure out three-dimensional
+space or object permanence in time, I will experience something that I have no
+framework to make sense of. Would I even be able to remember that, if some part
+of me were still present to observe?
+
+* Footnotes
+
+[fn:1] We now know that humans can actually be [[https://www.physoc.org/magazine-articles/echolocation-in-people/][trained in echolocation]]. But we are
+likely experiencing it differently from bats anyway.
